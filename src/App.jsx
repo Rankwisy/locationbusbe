@@ -744,27 +744,29 @@ function App() {
                 <CardTitle>{currentContent.contact.form.title}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="name">{currentContent.contact.form.name}</Label>
-                    <Input id="name" placeholder={currentContent.contact.form.name} />
-                  </div>
-                  <div>
-                    <Label htmlFor="email">{currentContent.contact.form.email}</Label>
-                    <Input id="email" type="email" placeholder={currentContent.contact.form.email} />
-                  </div>
-                </div>
-                <div>
-                  <Label htmlFor="subject">{currentContent.contact.form.subject}</Label>
-                  <Input id="subject" placeholder={currentContent.contact.form.subject} />
-                </div>
-                <div>
-                  <Label htmlFor="message">{currentContent.contact.form.message}</Label>
-                  <Textarea id="message" placeholder={currentContent.contact.form.message} rows={5} />
-                </div>
-                <Button className="w-full">
-                  {currentContent.contact.form.send}
-                </Button>
+               <form action="mailto:info@locationbus.be" method="post" encType="text/plain">
+                 <div className="grid grid-cols-2 gap-4 mb-4">
+                   <div>
+                     <Label htmlFor="name">{currentContent.contact.form.name}</Label>
+                     <Input id="name" name="name" placeholder={currentContent.contact.form.name} required />
+                   </div>
+                   <div>
+                     <Label htmlFor="email">{currentContent.contact.form.email}</Label>
+                     <Input id="email" name="email" type="email" placeholder={currentContent.contact.form.email} required />
+                   </div>
+                 </div>
+                 <div className="mb-4">
+                   <Label htmlFor="subject">{currentContent.contact.form.subject}</Label>
+                   <Input id="subject" name="subject" placeholder={currentContent.contact.form.subject} required />
+                 </div>
+                 <div className="mb-4">
+                   <Label htmlFor="message">{currentContent.contact.form.message}</Label>
+                   <Textarea id="message" name="message" placeholder={currentContent.contact.form.message} rows={5} required />
+                 </div>
+                 <Button type="submit" className="w-full">
+                   {currentContent.contact.form.send}
+                 </Button>
+               </form>
               </CardContent>
             </Card>
 
