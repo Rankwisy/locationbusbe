@@ -1,0 +1,76 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  jsonLd?: object | object[];
+  noindex?: boolean;
+  lang?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalUrl,
+  ogImage = '/og-image.jpg',
+  ogType = 'website',
+  jsonLd,
+  noindex = false,
+  lang = 'fr',
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() ?? 'https://www.locationbus.be';
+const fullCanonical = canonicalUrl ? (canonicalUrl.startsWith('http') ? canonicalUrl : new URL(canonicalUrl, siteUrl).href) : Astro.url.href;
+const fullOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, siteUrl).href;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="canonical" href={fullCanonical} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={fullCanonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOgImage} />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_BE' : lang === 'nl' ? 'nl_BE' : 'en_US'} />
+    <meta property="og:site_name" content="LocationBus" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={fullCanonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOgImage} />
+
+    <!-- AEO / AI Search - Extra context for LLMs -->
+    <meta name="author" content="LocationBus" />
+    <meta name="geo.region" content="BE-BRU" />
+    <meta name="geo.placename" content="Brussels" />
+
+    {jsonLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(Array.isArray(jsonLd) ? jsonLd : jsonLd)} />
+    )}
+    <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="/styles/global.css" />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Aller au contenu principal</a>
+    <slot />
+  </body>
+</html>

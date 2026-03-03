@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { site } from '../../data/content';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Location de Bus avec Chauffeur - Services LocationBus',
+  provider: { '@type': 'Organization', name: 'LocationBus', url: site.url },
+  areaServed: ['Bruxelles', 'Belgique', 'Europe'],
+};
+---
+
+<BaseLayout
+  title="Nos Services de Location de Bus | LocationBus Bruxelles"
+  description="Découvrez nos services de location de bus avec chauffeur : transferts aéroport, voyages Europe, événements. Bruxelles, Belgique et Europe. Devis gratuit."
+  canonicalUrl="/services/"
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <h1>Nos Services de Transport</h1>
+        <p>Location de bus avec chauffeur pour tous vos déplacements en groupe à Bruxelles, en Belgique et en Europe.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Services Disponibles</h2>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Location Bus Transfert</h3>
+            <p>Service de transfert professionnel pour déplacements en groupe. Idéal pour événements, sorties scolaires, séminaires.</p>
+            <a href="/services/transfert-bus/">Détails</a>
+          </article>
+          <article class="card">
+            <h3>Transfert Aéroport</h3>
+            <p>Transferts directs vers Brussels Airport (Zaventem) et Brussels South (Charleroi). Prise en charge et retour garantis.</p>
+            <a href="/services/transfert-aeroport/">Détails</a>
+          </article>
+          <article class="card">
+            <h3>Voyage Europe</h3>
+            <p>Voyages longue distance vers Paris, Amsterdam, Frankfurt, Rotterdam et toute l'Europe.</p>
+            <a href="/services/voyage-europe/">Détails</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { site } from '../../data/content';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Voyage Bus Europe - LocationBus',
+  description: 'Voyages longue distance en bus vers Paris, Amsterdam, Frankfurt',
+  provider: { '@type': 'Organization', name: 'LocationBus', url: site.url },
+};
+---
+
+<BaseLayout
+  title="Voyage Bus Europe | Paris, Amsterdam, Frankfurt - LocationBus"
+  description="Voyages en bus longue distance vers Paris, Amsterdam, Frankfurt, Rotterdam. LocationBus Bruxelles. Confort et fiabilité. Devis gratuit."
+  canonicalUrl="/services/voyage-europe/"
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <h1>Voyage Bus Europe</h1>
+        <p>Voyages confortables pour vos déplacements longue distance en Europe.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Destinations Populaires</h2>
+        <p>Paris, Amsterdam, Frankfurt, Rotterdam et toute l'Europe. Autocars confortables, chauffeurs expérimentés.</p>
+        <p><a href="/contact/" class="btn">Demander un Devis</a></p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

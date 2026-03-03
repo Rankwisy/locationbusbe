@@ -1,0 +1,33 @@
+# LocationBus - Location de Bus avec Chauffeur à Bruxelles
+
+> llms.txt - Structured content for AI search engines (ChatGPT, Perplexity, Claude, etc.)
+
+## About LocationBus
+
+LocationBus is a professional bus rental company with driver based in Brussels, Belgium. We have been the leader in coach transportation with driver in Belgium for over 15 years. We serve Brussels, all of Belgium, and Europe.
+
+**Services:** Bus rental with driver, airport transfers (Brussels Airport Zaventem, Brussels South Charleroi), long-distance travel to Paris, Amsterdam, Frankfurt, Rotterdam and across Europe.
+
+**Contact:** +32 2 446 01 91 | info@locationbus.be
+**Address:** Pegasuslaan 5, 1831 Machelen, Belgium
+
+## Key Pages (AI-friendly content)
+
+- Home: https://www.locationbus.be/
+- Services: https://www.locationbus.be/services/
+- Airport Transfer: https://www.locationbus.be/services/transfert-aeroport/
+- Bus Transfer: https://www.locationbus.be/services/transfert-bus/
+- Europe Travel: https://www.locationbus.be/services/voyage-europe/
+- About: https://www.locationbus.be/about/
+- Contact: https://www.locationbus.be/contact/
+
+## Permissions
+
+# Allow AI access to public pages
+Allow: /
+Allow: /services/
+Allow: /about/
+Allow: /contact/
+
+# Sitemap for discovery
+Sitemap: https://www.locationbus.be/sitemap-index.xml
