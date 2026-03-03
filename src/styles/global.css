@@ -51,6 +51,7 @@ header {
 nav { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; }
 nav a { color: var(--color-text); }
 nav a[aria-current="page"] { font-weight: 600; color: var(--color-primary); }
+.nav-logo img { display: block; }
 
 footer {
   background: var(--color-footer-bg);
@@ -74,10 +75,21 @@ ul { padding-left: 1.25rem; }
 
 .hero {
   background: var(--color-hero-bg);
+  background-size: cover;
+  background-position: center;
   color: var(--color-hero-text);
   padding: 4rem var(--space);
   text-align: center;
+  position: relative;
 }
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 0;
+}
+.hero .container { position: relative; z-index: 1; }
 .hero h1 { color: var(--color-hero-text); font-size: 2.5rem; }
 .hero p { font-size: 1.25rem; opacity: 0.9; }
 .hero__subtitle { font-size: 1.35rem; font-weight: 600; }

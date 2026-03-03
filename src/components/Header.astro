@@ -7,8 +7,8 @@ const currentPath = Astro.url.pathname;
 <header role="banner">
   <div class="container">
     <nav aria-label="Navigation principale">
-      <a href="/" aria-current={currentPath === '/' ? 'page' : undefined}>
-        <strong>LocationBus</strong>
+      <a href="/" aria-current={currentPath === '/' ? 'page' : undefined} class="nav-logo">
+        <img src="/logo.png" alt="LocationBus - Location de bus avec chauffeur à Bruxelles" width="140" height="48" />
       </a>
       {nav.map((item) => (
         <a
