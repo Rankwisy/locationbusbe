@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 export interface Props {
   title: string;
   description: string;
@@ -67,7 +69,6 @@ const fullOgImage = ogImage.startsWith('http') ? ogImage : new URL(ogImage, site
       <script type="application/ld+json" set:html={JSON.stringify(Array.isArray(jsonLd) ? jsonLd : jsonLd)} />
     )}
     <meta name="generator" content={Astro.generator} />
-    <link rel="stylesheet" href="/styles/global.css" />
   </head>
   <body>
     <a href="#main" class="skip-link">Aller au contenu principal</a>
