@@ -1,33 +1,48 @@
-# LocationBus - Location de Bus avec Chauffeur à Bruxelles
+# LocationBus – Location de Bus avec Chauffeur à Bruxelles
 
-> llms.txt - Structured content for AI search engines (ChatGPT, Perplexity, Claude, etc.)
+> llms.txt – Contenu structuré pour moteurs de recherche IA (ChatGPT, Perplexity, Claude, etc.)
 
 ## About LocationBus
 
-LocationBus is a professional bus rental company with driver based in Brussels, Belgium. We have been the leader in coach transportation with driver in Belgium for over 15 years. We serve Brussels, all of Belgium, and Europe.
+LocationBus is a professional bus rental company with driver based in Brussels, Belgium. Leader in coach transportation with driver in Belgium for over 15 years. We serve Brussels (all communes), Belgium, and Europe.
 
-**Services:** Bus rental with driver, airport transfers (Brussels Airport Zaventem, Brussels South Charleroi), long-distance travel to Paris, Amsterdam, Frankfurt, Rotterdam and across Europe.
+Services: Bus rental with driver, airport transfers (Brussels Airport Zaventem, Brussels South Charleroi), long-distance travel to Paris, Amsterdam, Frankfurt, Rotterdam and across Europe.
 
-**Contact:** +32 2 446 01 91 | info@locationbus.be
-**Address:** Pegasuslaan 5, 1831 Machelen, Belgium
+Contact: +32 2 446 01 91 | info@locationbus.be
+Address: Pegasuslaan 5, 1831 Machelen, Belgium
 
-## Key Pages (AI-friendly content)
+Devis gratuit · 7j/7 · Sans engagement · Réponse sous 24h
+
+## Key Pages (SEO & AI-friendly)
 
 - Home: https://www.locationbus.be/
+- Location Bus Bruxelles (hub): https://www.locationbus.be/location-bus-bruxelles/
 - Services: https://www.locationbus.be/services/
-- Airport Transfer: https://www.locationbus.be/services/transfert-aeroport/
-- Bus Transfer: https://www.locationbus.be/services/transfert-bus/
-- Europe Travel: https://www.locationbus.be/services/voyage-europe/
+- Transfert aéroport: https://www.locationbus.be/services/transfert-aeroport/
+- Transfert Zaventem: https://www.locationbus.be/services/transfert-aeroport/zaventem/
+- Transfert Charleroi: https://www.locationbus.be/services/transfert-aeroport/charleroi/
+- Transfert bus: https://www.locationbus.be/services/transfert-bus/
+- Voyage Europe: https://www.locationbus.be/services/voyage-europe/
 - About: https://www.locationbus.be/about/
 - Contact: https://www.locationbus.be/contact/
 
+## Location bus par commune (Bruxelles)
+
+- Ixelles: https://www.locationbus.be/location-bus-bruxelles/ixelles/
+- Uccle: https://www.locationbus.be/location-bus-bruxelles/uccle/
+- Schaerbeek: https://www.locationbus.be/location-bus-bruxelles/schaerbeek/
+- Etterbeek: https://www.locationbus.be/location-bus-bruxelles/etterbeek/
+- Woluwe-Saint-Lambert: https://www.locationbus.be/location-bus-bruxelles/woluwe-saint-lambert/
+- Woluwe-Saint-Pierre: https://www.locationbus.be/location-bus-bruxelles/woluwe-saint-pierre/
+- Anderlecht: https://www.locationbus.be/location-bus-bruxelles/anderlecht/
+- Bruxelles-Ville: https://www.locationbus.be/location-bus-bruxelles/bruxelles-ville/
+
 ## Permissions
 
-# Allow AI access to public pages
 Allow: /
+Allow: /location-bus-bruxelles/
 Allow: /services/
 Allow: /about/
 Allow: /contact/
 
-# Sitemap for discovery
 Sitemap: https://www.locationbus.be/sitemap-index.xml

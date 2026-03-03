@@ -2,20 +2,21 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { site } from '../../data/content';
+import ConversionBanner from '../../components/ConversionBanner.astro';
+import { site } from '../../data/site';
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Location Bus Transfert - LocationBus',
   description: 'Service de transfert bus professionnel pour groupes',
-  provider: { '@type': 'Organization', name: 'LocationBus', url: site.url },
+  provider: { '@type': 'Organization', name: site.name, url: site.url },
 };
 ---
 
 <BaseLayout
   title="Location Bus Transfert pour Groupes | LocationBus Bruxelles"
-  description="Service de transfert bus professionnel pour tous vos déplacements en groupe. Bruxelles, Belgique, Europe. Événements, séminaires, sorties."
+  description="Transfert bus professionnel pour groupes. Bruxelles, Belgique, Europe. Devis gratuit, 7j/7, sans engagement."
   canonicalUrl="/services/transfert-bus/"
   jsonLd={jsonLd}
   lang="fr"
@@ -26,14 +27,15 @@ const jsonLd = {
       <div class="container">
         <h1>Location Bus Transfert</h1>
         <p>Service de transfert professionnel pour tous vos déplacements en groupe.</p>
+        <p><a href="/contact/" class="btn">{site.cta.devisLong}</a></p>
       </div>
     </section>
-
+    <ConversionBanner />
     <section>
       <div class="container">
         <h2>Transferts Sur Mesure</h2>
         <p>Que ce soit pour un événement d'entreprise, une sortie scolaire ou un déplacement privé, nous organisons votre transfert de A à Z.</p>
-        <p><a href="/contact/" class="btn">Obtenir un Devis</a></p>
+        <p><a href="/location-bus-bruxelles/">Location bus par commune à Bruxelles</a> · <a href="/services/transfert-aeroport/">Transfert aéroport</a></p>
       </div>
     </section>
   </main>

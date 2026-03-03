@@ -2,20 +2,21 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { site } from '../../data/content';
+import ConversionBanner from '../../components/ConversionBanner.astro';
+import { site } from '../../data/site';
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Location de Bus avec Chauffeur - Services LocationBus',
-  provider: { '@type': 'Organization', name: 'LocationBus', url: site.url },
+  provider: { '@type': 'Organization', name: site.name, url: site.url },
   areaServed: ['Bruxelles', 'Belgique', 'Europe'],
 };
 ---
 
 <BaseLayout
   title="Nos Services de Location de Bus | LocationBus Bruxelles"
-  description="Découvrez nos services de location de bus avec chauffeur : transferts aéroport, voyages Europe, événements. Bruxelles, Belgique et Europe. Devis gratuit."
+  description="Location de bus avec chauffeur : transferts aéroport, voyages Europe, événements. Bruxelles, Belgique, Europe. Devis gratuit, 7j/7, sans engagement."
   canonicalUrl="/services/"
   jsonLd={jsonLd}
   lang="fr"
@@ -26,9 +27,10 @@ const jsonLd = {
       <div class="container">
         <h1>Nos Services de Transport</h1>
         <p>Location de bus avec chauffeur pour tous vos déplacements en groupe à Bruxelles, en Belgique et en Europe.</p>
+        <p><a href="/contact/" class="btn">{site.cta.devisLong}</a></p>
       </div>
     </section>
-
+    <ConversionBanner />
     <section>
       <div class="container">
         <h2>Services Disponibles</h2>
@@ -41,7 +43,7 @@ const jsonLd = {
           <article class="card">
             <h3>Transfert Aéroport</h3>
             <p>Transferts directs vers Brussels Airport (Zaventem) et Brussels South (Charleroi). Prise en charge et retour garantis.</p>
-            <a href="/services/transfert-aeroport/">Détails</a>
+            <a href="/services/transfert-aeroport/">Détails</a> · <a href="/services/transfert-aeroport/zaventem/">Zaventem</a> · <a href="/services/transfert-aeroport/charleroi/">Charleroi</a>
           </article>
           <article class="card">
             <h3>Voyage Europe</h3>
@@ -49,6 +51,8 @@ const jsonLd = {
             <a href="/services/voyage-europe/">Détails</a>
           </article>
         </div>
+        <h2>Location Bus par Commune</h2>
+        <p><a href="/location-bus-bruxelles/">Voir toutes les communes de Bruxelles</a></p>
       </div>
     </section>
   </main>

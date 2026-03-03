@@ -2,13 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { site } from '../../data/content';
+import ConversionBanner from '../../components/ConversionBanner.astro';
+import { site } from '../../data/site';
 
 const faqItems = [
-  { q: 'Quels sont vos tarifs pour une location de bus ?', a: 'Nos tarifs varient selon la durée, la distance et le type de véhicule. Un bus standard de 50 places coûte entre 300 et 950 euros par jour. Contactez-nous pour un devis personnalisé.' },
-  { q: 'Comment réserver un bus avec chauffeur ?', a: 'Contactez-nous par téléphone au +32 2 446 01 91 ou par email à info@locationbus.be. Nous vous fournirons un devis détaillé sous 24h.' },
-  { q: 'Quelles sont vos zones de service ?', a: 'Nous desservons Bruxelles, toute la Belgique et l\'Europe. Nos destinations populaires incluent Paris, Amsterdam, Frankfurt et Rotterdam.' },
-  { q: 'Vos véhicules sont-ils assurés ?', a: 'Oui, tous nos véhicules sont entièrement assurés et nos chauffeurs sont expérimentés et certifiés.' },
+  { id: 'faq-1', q: 'Quels sont vos tarifs pour une location de bus ?', a: 'Nos tarifs varient selon la durée, la distance et le type de véhicule. Un bus standard de 50 places coûte entre 300 et 950 euros par jour. Contactez-nous pour un devis personnalisé.' },
+  { id: 'faq-2', q: 'Comment réserver un bus avec chauffeur ?', a: 'Contactez-nous par téléphone au +32 2 446 01 91 ou par email à info@locationbus.be. Nous vous fournirons un devis détaillé sous 24h.' },
+  { id: 'faq-3', q: 'Quelles sont vos zones de service ?', a: 'Nous desservons Bruxelles, toute la Belgique et l\'Europe. Nos destinations populaires incluent Paris, Amsterdam, Frankfurt et Rotterdam.' },
+  { id: 'faq-4', q: 'Vos véhicules sont-ils assurés ?', a: 'Oui, tous nos véhicules sont entièrement assurés et nos chauffeurs sont expérimentés et certifiés.' },
 ];
 
 const faqSchema = {
@@ -26,7 +27,7 @@ const contactSchema = {
   '@type': 'ContactPage',
   mainEntity: {
     '@type': 'LocalBusiness',
-    name: 'LocationBus',
+    name: site.name,
     telephone: site.phone,
     email: site.email,
     address: { '@type': 'PostalAddress', streetAddress: 'Pegasuslaan 5', addressLocality: 'Machelen', postalCode: '1831', addressCountry: 'BE' },
@@ -38,7 +39,7 @@ const jsonLd = [faqSchema, contactSchema];
 
 <BaseLayout
   title="Contact LocationBus | Devis Gratuit Location Bus Bruxelles"
-  description="Contactez LocationBus pour un devis gratuit. Louez un bus en 30 secondes. Tél +32 2 446 01 91. Réponse garantie sous 24h. Bruxelles, Belgique."
+  description="Contactez LocationBus pour un devis gratuit. 7j/7, sans engagement. Réponse sous 24h. +32 2 446 01 91."
   canonicalUrl="/contact/"
   jsonLd={jsonLd}
   lang="fr"
@@ -48,34 +49,37 @@ const jsonLd = [faqSchema, contactSchema];
     <section class="hero">
       <div class="container">
         <h1>Contactez-Nous</h1>
-        <p>Louez un bus en 30 secondes. Réponse garantie sous 24h.</p>
+        <p>Devis gratuit, sans engagement. Réponse garantie sous 24h.</p>
       </div>
     </section>
+
+    <ConversionBanner />
 
     <section>
       <div class="container">
         <div class="grid-2">
           <div>
             <h2>Informations de Contact</h2>
-            <p><strong>Téléphone:</strong> <a href="tel:+3224460191">{site.phone}</a></p>
+            <p><strong>Téléphone:</strong> <a href={site.phoneTel}>{site.phone}</a></p>
             <p><strong>Email:</strong> <a href={`mailto:${site.email}`}>{site.email}</a></p>
             <p><strong>Adresse:</strong> {site.address}</p>
-            <p>Service client 7 jours sur 7.</p>
+            <p>{site.cta.service247}</p>
           </div>
           <div>
             <h2>Demander un Devis</h2>
-            <form action="mailto:info@locationbus.be" method="post" enctype="text/plain">
+            <form action="mailto:info@locationbus.be" method="post" enctype="text/plain" aria-labelledby="form-title">
+              <p id="form-title" class="visually-hidden">Formulaire de demande de devis</p>
               <p>
-                <label for="name">Votre nom</label><br />
-                <input type="text" id="name" name="name" required style="width:100%;padding:0.5rem;" />
+                <label for="contact-name">Votre nom</label><br />
+                <input type="text" id="contact-name" name="name" required class="form-input" />
               </p>
               <p>
-                <label for="email">Votre email</label><br />
-                <input type="email" id="email" name="email" required style="width:100%;padding:0.5rem;" />
+                <label for="contact-email">Votre email</label><br />
+                <input type="email" id="contact-email" name="email" required class="form-input" />
               </p>
               <p>
-                <label for="message">Message</label><br />
-                <textarea id="message" name="message" rows="5" required style="width:100%;padding:0.5rem;"></textarea>
+                <label for="contact-message">Message</label><br />
+                <textarea id="contact-message" name="message" rows="5" required class="form-input"></textarea>
               </p>
               <button type="submit" class="btn">Envoyer</button>
             </form>
@@ -85,7 +89,7 @@ const jsonLd = [faqSchema, contactSchema];
         <h2>Questions Fréquentes</h2>
         <div>
           {faqItems.map((item) => (
-            <article style="margin-bottom: 1.5rem;">
+            <article id={item.id}>
               <h3>{item.q}</h3>
               <p>{item.a}</p>
             </article>

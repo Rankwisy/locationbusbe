@@ -1,24 +1,42 @@
 ---
+import { site, footerLinks } from '../data/site';
 ---
 
-<footer>
+<footer role="contentinfo">
   <div class="container">
-    <div class="grid-2" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+    <div class="footer-grid">
       <div>
-        <p><strong>LocationBus</strong> – Société de transport à Bruxelles</p>
-        <p>Pegasuslaan 5, 1831 Machelen, Belgique</p>
-        <p><a href="tel:+3224460191">+32 2 446 01 91</a> · <a href="mailto:info@locationbus.be">info@locationbus.be</a></p>
+        <p><strong>{site.name}</strong> – {site.tagline}</p>
+        <p>{site.address}</p>
+        <p><a href={site.phoneTel}>{site.phone}</a> · <a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p class="footer-cta">{site.cta.devis} · {site.cta.service247} · {site.cta.sansEngagement}</p>
       </div>
       <div>
-        <h3>Liens Rapides</h3>
-        <ul>
-          <li><a href="/services/">Location Bus</a></li>
-          <li><a href="/services/transfert-aeroport/">Transfert Aéroport</a></li>
-          <li><a href="/services/voyage-europe/">Voyage Europe</a></li>
-          <li><a href="/contact/">Contact</a></li>
+        <h3 id="footer-services">Services</h3>
+        <ul aria-labelledby="footer-services">
+          {footerLinks.services.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
         </ul>
       </div>
+      <div>
+        <h3 id="footer-bruxelles">Location bus Bruxelles</h3>
+        <ul aria-labelledby="footer-bruxelles">
+          {footerLinks.bruxelles.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 id="footer-aeroports">Aéroports</h3>
+        <ul aria-labelledby="footer-aeroports">
+          {footerLinks.aeroports.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+        <p><a href={footerLinks.contact.href}>{footerLinks.contact.label}</a></p>
+      </div>
     </div>
-    <p style="margin-top: 2rem; font-size: 0.875rem; color: #666;">© 2025 LocationBus. Tous droits réservés.</p>
+    <p class="footer-copy">© 2025 {site.name}. Tous droits réservés.</p>
   </div>
 </footer>

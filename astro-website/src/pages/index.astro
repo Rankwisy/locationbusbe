@@ -2,13 +2,14 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { site } from '../data/content';
+import ConversionBanner from '../components/ConversionBanner.astro';
+import { site } from '../data/site';
 
 const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'LocationBus',
+    name: site.name,
     url: site.url,
     telephone: site.phone,
     email: site.email,
@@ -23,7 +24,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'LocationBus - Location de Bus avec Chauffeur à Bruxelles',
+    name: `${site.name} - ${site.tagline}`,
     url: site.url,
     potentialAction: {
       '@type': 'SearchAction',
@@ -34,7 +35,7 @@ const jsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'LocationBus',
+    name: site.name,
     image: `${site.url}/og-image.jpg`,
     telephone: site.phone,
     address: {
@@ -53,7 +54,7 @@ const jsonLd = [
 
 <BaseLayout
   title="Location de Bus avec Chauffeur à Bruxelles | LocationBus"
-  description="Service professionnel de location de bus avec chauffeur à Bruxelles. Transferts aéroport, voyages en Europe, événements. Devis gratuit sous 24h. +32 2 446 01 91"
+  description="Service professionnel de location de bus avec chauffeur à Bruxelles. Transferts aéroport, voyages Europe. Devis gratuit, 7j/7, sans engagement. +32 2 446 01 91"
   canonicalUrl="/"
   jsonLd={jsonLd}
   lang="fr"
@@ -63,11 +64,13 @@ const jsonLd = [
     <section class="hero">
       <div class="container">
         <h1>Location de Bus avec Chauffeur à Bruxelles</h1>
-        <h2>Service professionnel pour vos déplacements en Belgique et Europe</h2>
-        <p>Depuis plus de 15 ans, LocationBus est le leader du transport en autocar avec chauffeur. Devis personnalisé sous 24h.</p>
-        <p><a href="/contact/" class="btn">Demandez un Devis</a></p>
+        <p class="hero__subtitle">Service professionnel pour vos déplacements en Belgique et Europe</p>
+        <p>Depuis plus de 15 ans, LocationBus est le leader du transport en autocar avec chauffeur. {site.cta.devis}, {site.cta.reponse24h}.</p>
+        <p><a href="/contact/" class="btn">{site.cta.devisLong}</a></p>
       </div>
     </section>
+
+    <ConversionBanner />
 
     <section>
       <div class="container">
@@ -97,7 +100,7 @@ const jsonLd = [
       </div>
     </section>
 
-    <section style="background: #f5f5f5;">
+    <section class="hero-bg">
       <div class="container">
         <h2>Notre Flotte de Véhicules</h2>
         <p>Des véhicules modernes et confortables pour tous vos besoins.</p>
@@ -135,6 +138,13 @@ const jsonLd = [
             <p>Tous les détails convenus à l'avance pour votre groupe.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="hero-bg">
+      <div class="container">
+        <h2>Location Bus par Commune à Bruxelles</h2>
+        <p><a href="/location-bus-bruxelles/">Voir toutes les communes</a> : Ixelles, Uccle, Schaerbeek, Etterbeek, Woluwe, Anderlecht, Bruxelles-Ville.</p>
       </div>
     </section>
   </main>

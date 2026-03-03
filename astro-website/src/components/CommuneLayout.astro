@@ -1,0 +1,45 @@
+---
+export interface Props {
+  communeTitle: string;
+  communeSlug: string;
+  title: string;
+  description: string;
+}
+
+const { communeTitle, communeSlug, title, description } = Astro.props;
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ConversionBanner from '../components/ConversionBanner.astro';
+import { site } from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: `Location bus ${communeTitle} – ${site.name}`,
+  provider: { '@type': 'Organization', name: site.name, url: site.url },
+  areaServed: { '@type': 'City', name: communeTitle },
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl={`/location-bus-bruxelles/${communeSlug}/`}
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <h1>Location Bus {communeTitle}</h1>
+        <p>Location de bus avec chauffeur au départ de {communeTitle}, Bruxelles. Devis gratuit, 7j/7, sans engagement.</p>
+        <p><a href="/contact/" class="btn">{site.cta.devisLong}</a></p>
+      </div>
+    </section>
+    <ConversionBanner />
+    <slot />
+  </main>
+  <Footer />
+</BaseLayout>

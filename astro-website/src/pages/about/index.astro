@@ -2,14 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { site } from '../../data/content';
+import { site } from '../../data/site';
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'AboutPage',
   mainEntity: {
     '@type': 'Organization',
-    name: 'LocationBus',
+    name: site.name,
     url: site.url,
     description: 'Leader du transport en autocar avec chauffeur en Belgique depuis plus de 15 ans.',
   },
