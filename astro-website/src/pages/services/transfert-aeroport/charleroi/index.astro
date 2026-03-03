@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Header from '../../../../components/Header.astro';
+import Footer from '../../../../components/Footer.astro';
+import ConversionBanner from '../../../../components/ConversionBanner.astro';
+import { site } from '../../../../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Transfert Bus Aéroport Charleroi – LocationBus',
+  description: 'Transferts bus vers Brussels South Charleroi. Au départ de Bruxelles.',
+  provider: { '@type': 'Organization', name: site.name, url: site.url },
+};
+---
+
+<BaseLayout
+  title="Transfert Bus Aéroport Charleroi | Brussels South | LocationBus"
+  description="Transfert bus vers Brussels South (Charleroi). Départ Bruxelles. Devis gratuit, 7j/7, sans engagement."
+  canonicalUrl="/services/transfert-aeroport/charleroi/"
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <h1>Transfert Bus Aéroport Charleroi</h1>
+        <p>Transferts vers Brussels South Charleroi. Au départ de Bruxelles et région. Devis gratuit sous 24h.</p>
+        <p><a href="/contact/" class="btn">{site.cta.devisLong}</a></p>
+      </div>
+    </section>
+    <ConversionBanner />
+    <section class="hero-bg">
+      <div class="container">
+        <h2>Transfert Charleroi</h2>
+        <p>Transferts en bus vers l'aéroport de Charleroi pour groupes, entreprises, événements.</p>
+        <p><a href="/services/transfert-aeroport/">Tous les transferts aéroport</a> · <a href="/services/transfert-aeroport/zaventem/">Transfert Zaventem</a> · <a href="/location-bus-bruxelles/">Location bus Bruxelles</a></p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

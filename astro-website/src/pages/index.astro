@@ -1,0 +1,152 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ConversionBanner from '../components/ConversionBanner.astro';
+import { site } from '../data/site';
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: site.name,
+    url: site.url,
+    telephone: site.phone,
+    email: site.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Pegasuslaan 5',
+      addressLocality: 'Machelen',
+      postalCode: '1831',
+      addressCountry: 'BE',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: `${site.name} - ${site.tagline}`,
+    url: site.url,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: { '@type': 'EntryPoint', urlTemplate: `${site.url}/contact/` },
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: site.name,
+    image: `${site.url}/og-image.jpg`,
+    telephone: site.phone,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Pegasuslaan 5',
+      addressLocality: 'Machelen',
+      addressRegion: 'Brussels',
+      postalCode: '1831',
+      addressCountry: 'BE',
+    },
+    geo: { '@type': 'GeoCoordinates', latitude: 50.8503, longitude: 4.3517 },
+    url: site.url,
+  },
+];
+---
+
+<BaseLayout
+  title="Location de Bus avec Chauffeur à Bruxelles | LocationBus"
+  description="Service professionnel de location de bus avec chauffeur à Bruxelles. Transferts aéroport, voyages Europe. Devis gratuit, 7j/7, sans engagement. +32 2 446 01 91"
+  canonicalUrl="/"
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <h1>Location de Bus avec Chauffeur à Bruxelles</h1>
+        <p class="hero__subtitle">Service professionnel pour vos déplacements en Belgique et Europe</p>
+        <p>Depuis plus de 15 ans, LocationBus est le leader du transport en autocar avec chauffeur. {site.cta.devis}, {site.cta.reponse24h}.</p>
+        <p><a href="/contact/" class="btn">{site.cta.devisLong}</a></p>
+      </div>
+    </section>
+
+    <ConversionBanner />
+
+    <section>
+      <div class="container">
+        <h2>Nos Services de Transport</h2>
+        <div class="grid-4">
+          <article class="card">
+            <h3>Location Bus Transfert</h3>
+            <p>Service de transfert professionnel pour tous vos déplacements en groupe.</p>
+            <a href="/services/transfert-bus/">En savoir plus</a>
+          </article>
+          <article class="card">
+            <h3>Location Bus Aéroport</h3>
+            <p>Transferts directs vers les aéroports de Bruxelles (Zaventem, Charleroi) et environs.</p>
+            <a href="/services/transfert-aeroport/">En savoir plus</a>
+          </article>
+          <article class="card">
+            <h3>Voyage Longue Distance</h3>
+            <p>Voyages confortables pour vos déplacements longue distance en Europe.</p>
+            <a href="/services/voyage-europe/">En savoir plus</a>
+          </article>
+          <article class="card">
+            <h3>Location Bus Europe</h3>
+            <p>Transport pour vos voyages à travers toute l'Europe (Paris, Amsterdam, Frankfurt).</p>
+            <a href="/services/">En savoir plus</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero-bg">
+      <div class="container">
+        <h2>Notre Flotte de Véhicules</h2>
+        <p>Des véhicules modernes et confortables pour tous vos besoins.</p>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Autocars Luxe</h3>
+            <p>Jusqu'à 60 places. Euro 6, climatisation, sièges confort, WiFi.</p>
+          </article>
+          <article class="card">
+            <h3>Minibus VIP</h3>
+            <p>Jusqu'à 30 places. Confort premium, équipement moderne.</p>
+          </article>
+          <article class="card">
+            <h3>Minibus Standard</h3>
+            <p>Jusqu'à 20 places. Économique, fiable, idéal petits groupes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Pourquoi Nous Choisir</h2>
+        <div class="grid-3">
+          <div>
+            <h3>Prix Compétitifs</h3>
+            <p>Prix fixe incluant taxes, péages et pourboires.</p>
+          </div>
+          <div>
+            <h3>Véhicules de Qualité</h3>
+            <p>Bus spacieux avec sièges confortables pour tous.</p>
+          </div>
+          <div>
+            <h3>Service Sur-Mesure</h3>
+            <p>Tous les détails convenus à l'avance pour votre groupe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero-bg">
+      <div class="container">
+        <h2>Location Bus par Commune à Bruxelles</h2>
+        <p><a href="/location-bus-bruxelles/">Voir toutes les communes</a> : Ixelles, Uccle, Schaerbeek, Etterbeek, Woluwe, Anderlecht, Bruxelles-Ville.</p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
