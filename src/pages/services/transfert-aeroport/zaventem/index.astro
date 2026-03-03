@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import Header from '../../../../components/Header.astro';
+import Footer from '../../../../components/Footer.astro';
+import ConversionBanner from '../../../../components/ConversionBanner.astro';
+import { site } from '../../../../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Transfert Bus Brussels Airport Zaventem – LocationBus',
+  description: 'Transferts bus vers et depuis Brussels Airport Zaventem. Bruxelles, Machelen, Brabant.',
+  provider: { '@type': 'Organization', name: site.name, url: site.url },
+};
+---
+
+<BaseLayout
+  title="Transfert Bus Aéroport Zaventem | Brussels Airport | LocationBus"
+  description="Transfert bus vers Brussels Airport (Zaventem). Départ Bruxelles, Machelen, Brabant. Devis gratuit, 7j/7, sans engagement."
+  canonicalUrl="/services/transfert-aeroport/zaventem/"
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <h1>Transfert Bus Aéroport Zaventem</h1>
+        <p>Transferts directs vers Brussels Airport (Zaventem). Au départ de Bruxelles et environs. Devis gratuit sous 24h.</p>
+        <p><a href="/contact/" class="btn">{site.cta.devisLong}</a></p>
+      </div>
+    </section>
+    <ConversionBanner />
+    <section class="hero-bg">
+      <div class="container">
+        <h2>Transfert Zaventem</h2>
+        <p>Service de transfert en bus vers et depuis l'aéroport de Zaventem pour groupes et événements.</p>
+        <p><a href="/services/transfert-aeroport/">Tous les transferts aéroport</a> · <a href="/services/transfert-aeroport/charleroi/">Transfert Charleroi</a> · <a href="/location-bus-bruxelles/">Location bus Bruxelles</a></p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

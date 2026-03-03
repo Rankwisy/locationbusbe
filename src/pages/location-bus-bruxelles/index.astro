@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ConversionBanner from '../../components/ConversionBanner.astro';
+import { site, footerLinks } from '../../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Location Bus Bruxelles – Toutes les communes',
+  description: 'Location de bus avec chauffeur dans toutes les communes de Bruxelles : Ixelles, Uccle, Schaerbeek, Etterbeek, Woluwe, Anderlecht, Bruxelles-Ville.',
+  url: `${site.url}/location-bus-bruxelles/`,
+  mainEntity: {
+    '@type': 'LocalBusiness',
+    name: site.name,
+    telephone: site.phone,
+    address: { '@type': 'PostalAddress', addressLocality: 'Brussels', addressCountry: 'BE' },
+  },
+};
+---
+
+<BaseLayout
+  title="Location Bus Bruxelles | Par Commune – Devis Gratuit | LocationBus"
+  description="Location de bus avec chauffeur à Bruxelles : Ixelles, Uccle, Schaerbeek, Etterbeek, Woluwe, Anderlecht, Bruxelles-Ville. Devis gratuit, 7j/7, sans engagement."
+  canonicalUrl="/location-bus-bruxelles/"
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <h1>Location Bus Bruxelles</h1>
+        <p>Location de bus avec chauffeur dans toutes les communes de Bruxelles. Devis gratuit sous 24h, service 7j/7, sans engagement.</p>
+        <p><a href="/contact/" class="btn">{site.cta.devisLong}</a></p>
+      </div>
+    </section>
+
+    <ConversionBanner />
+
+    <section class="hero-bg">
+      <div class="container">
+        <h2>Location bus par commune à Bruxelles</h2>
+        <p>Choisissez votre commune pour un service de location de bus avec chauffeur au départ de Bruxelles.</p>
+        <ul>
+          {footerLinks.bruxelles.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Services associés</h2>
+        <ul>
+          <li><a href="/services/">Location bus avec chauffeur</a></li>
+          <li><a href="/services/transfert-aeroport/">Transfert aéroport Bruxelles</a></li>
+          <li><a href="/services/transfert-aeroport/zaventem/">Transfert Zaventem</a></li>
+          <li><a href="/services/transfert-aeroport/charleroi/">Transfert Charleroi</a></li>
+          <li><a href="/contact/">Contact et devis</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

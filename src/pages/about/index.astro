@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { site } from '../../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  mainEntity: {
+    '@type': 'Organization',
+    name: site.name,
+    url: site.url,
+    description: 'Leader du transport en autocar avec chauffeur en Belgique depuis plus de 15 ans.',
+  },
+};
+---
+
+<BaseLayout
+  title="À Propos de LocationBus | Votre Partenaire Transport Bruxelles"
+  description="LocationBus : leader du transport en autocar avec chauffeur en Belgique depuis 15 ans. Mission, valeurs, expertise. Bruxelles, Belgique, Europe."
+  canonicalUrl="/about/"
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <h1>À Propos de LocationBus</h1>
+        <p>Votre partenaire de confiance pour le transport en groupe</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Notre Histoire</h2>
+        <p>Depuis plus de 15 ans, LocationBus est le leader du transport en autocar avec chauffeur en Belgique. Notre expertise et notre engagement envers l'excellence nous permettent d'offrir des services de transport de qualité supérieure pour tous vos besoins de déplacement en groupe.</p>
+
+        <h3>Notre Mission</h3>
+        <p>Fournir des solutions de transport sûres, confortables et fiables pour tous vos voyages en groupe, que ce soit pour des événements d'entreprise, des sorties scolaires, ou des voyages touristiques.</p>
+
+        <h3>Nos Valeurs</h3>
+        <ul>
+          <li>Sécurité et fiabilité</li>
+          <li>Service client exceptionnel</li>
+          <li>Respect de l'environnement</li>
+          <li>Innovation continue</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

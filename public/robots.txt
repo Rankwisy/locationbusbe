@@ -1,27 +1,19 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://locationbus.be/sitemap.xml
+User-agent: GPTBot
+Allow: /
 
-# Disallow admin areas (if any)
-Disallow: /admin/
-Disallow: /private/
+User-agent: ChatGPT-User
+Allow: /
 
-# Allow important pages
-Allow: /fr/
-Allow: /nl/
-Allow: /en/
-Allow: /fr/services
-Allow: /nl/diensten
-Allow: /en/services
-Allow: /fr/contact
-Allow: /nl/contact
-Allow: /en/contact
-Allow: /fr/blog
-Allow: /nl/blog
-Allow: /en/blog
+User-agent: PerplexityBot
+Allow: /
 
-# Crawl delay (optional)
-Crawl-delay: 1
+User-agent: Claude-Web
+Allow: /
 
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.locationbus.be/sitemap-index.xml

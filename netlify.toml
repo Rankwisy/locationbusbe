@@ -1,0 +1,5 @@
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+# No base directory - Astro is at repo root

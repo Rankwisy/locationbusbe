@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import ConversionBanner from '../../../components/ConversionBanner.astro';
+import { site } from '../../../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Transfert Bus Aéroport Bruxelles - LocationBus',
+  description: 'Transferts bus vers Brussels Airport Zaventem et Brussels South Charleroi',
+  provider: { '@type': 'Organization', name: site.name, url: site.url },
+};
+---
+
+<BaseLayout
+  title="Transfert Bus Aéroport Bruxelles | Zaventem & Charleroi | LocationBus"
+  description="Transferts bus professionnels vers Brussels Airport (Zaventem) et Brussels South (Charleroi). Devis gratuit, 7j/7, sans engagement."
+  canonicalUrl="/services/transfert-aeroport/"
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <h1>Transfert Bus Aéroport Bruxelles</h1>
+        <p>Transferts directs vers Brussels Airport (Zaventem) et Brussels South (Charleroi). Devis gratuit sous 24h.</p>
+        <p><a href="/contact/" class="btn">{site.cta.devisLong}</a></p>
+      </div>
+    </section>
+    <ConversionBanner />
+    <section>
+      <div class="container">
+        <h2>Aéroports Desservis</h2>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Brussels Airport (Zaventem)</h3>
+            <p>Transferts vers et depuis Brussels Airport. Idéal pour groupes, entreprises.</p>
+            <a href="/services/transfert-aeroport/zaventem/">Transfert Zaventem</a>
+          </article>
+          <article class="card">
+            <h3>Brussels South Charleroi</h3>
+            <p>Transferts vers Charleroi Airport depuis Bruxelles et la Belgique.</p>
+            <a href="/services/transfert-aeroport/charleroi/">Transfert Charleroi</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
