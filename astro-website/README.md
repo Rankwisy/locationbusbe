@@ -26,6 +26,18 @@ pnpm build
 pnpm preview
 ```
 
+> **Note** : Le build avec l’adapter Netlify peut échouer en local sous Windows (symlinks). Le build Netlify en production fonctionne correctement sur Linux.
+
+## Deployment (Netlify)
+
+Le site utilise `@astrojs/netlify`. Paramètres Netlify :
+
+- **Base directory** : `astro-website` (si repo root = locationbusbe)
+- **Build command** : `pnpm build`
+- **Publish directory** : `dist`
+
+Le fichier `netlify.toml` contient la config si le root du projet Netlify est `astro-website`.
+
 ## URL Structure (toutes avec trailing slash)
 
 | Niveau | URL |
