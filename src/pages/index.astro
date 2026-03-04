@@ -5,26 +5,69 @@ import Footer from '../components/Footer.astro';
 import ConversionBanner from '../components/ConversionBanner.astro';
 import { site } from '../data/site';
 
+const faqItems = [
+  {
+    q: 'Quels sont les tarifs pour une location de bus avec chauffeur à Bruxelles ?',
+    a: 'Nos tarifs dépendent du type de véhicule, de la durée et du trajet. Un minibus à partir de 8 places démarre vers 350€/jour, un autocar 50 places vers 600€/jour. Demandez un devis gratuit personnalisé pour obtenir un prix précis.',
+  },
+  {
+    q: 'Quelle est votre zone de service pour le transport de groupe ?',
+    a: 'Nous desservons Bruxelles, le Brabant Wallon (Waterloo, Wavre, Braine-l\'Alleud), la Belgique et l\'Europe. Départs depuis Ixelles, Uccle, Schaerbeek, Etterbeek et toutes les communes bruxelloises.',
+  },
+  {
+    q: 'Proposez-vous des minibus VIP en Belgique ?',
+    a: 'Oui. Notre flotte inclut des minibus VIP (8 à 30 places) avec Wi-Fi, prises USB, climatisation et toilettes. Idéal pour mariages, séminaires et événements corporate.',
+  },
+  {
+    q: 'Comment réserver un bus pour un transfert aéroport ?',
+    a: 'Contactez-nous par téléphone ou formulaire. Nous établissons un devis gratuit sous 24h. Service 7j/7 vers Zaventem et Charleroi.',
+  },
+];
+
 const jsonLd = [
   {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': 'LocalBusiness',
+    '@id': `${site.url}/#localbusiness`,
     name: site.name,
+    description: 'Location de bus et minibus avec chauffeur à Bruxelles. Transport de groupe, transferts aéroport, mariages, séminaires. Flotte 8 à 78 places. Minibus VIP Belgique.',
     url: site.url,
+    image: [`${site.url}/og-image.jpg`, `${site.url}/logo.png`],
     telephone: site.phone,
     email: site.email,
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Pegasuslaan 5',
       addressLocality: 'Machelen',
+      addressRegion: 'Bruxelles',
       postalCode: '1831',
       addressCountry: 'BE',
+    },
+    geo: { '@type': 'GeoCoordinates', latitude: 50.8503, longitude: 4.3517 },
+    areaServed: [
+      { '@type': 'City', name: 'Bruxelles' },
+      { '@type': 'City', name: 'Ixelles' },
+      { '@type': 'City', name: 'Uccle' },
+      { '@type': 'City', name: 'Waterloo' },
+      { '@type': 'City', name: 'Wavre' },
+      { '@type': 'Country', name: 'Belgique' },
+    ],
+    priceRange: '€€',
+    openingHoursSpecification: { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'], opens: '00:00', closes: '23:59' },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Services location bus',
+      itemListElement: [
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Location bus avec chauffeur Bruxelles' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Transport de groupe Bruxelles' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Minibus VIP Belgique' } },
+      ],
     },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: `${site.name} - ${site.tagline}`,
+    name: `${site.name} - Location bus avec chauffeur Bruxelles`,
     url: site.url,
     potentialAction: {
       '@type': 'SearchAction',
@@ -34,27 +77,19 @@ const jsonLd = [
   },
   {
     '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: site.name,
-    image: `${site.url}/og-image.jpg`,
-    telephone: site.phone,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: 'Pegasuslaan 5',
-      addressLocality: 'Machelen',
-      addressRegion: 'Brussels',
-      postalCode: '1831',
-      addressCountry: 'BE',
-    },
-    geo: { '@type': 'GeoCoordinates', latitude: 50.8503, longitude: 4.3517 },
-    url: site.url,
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: a },
+    })),
   },
 ];
 ---
 
 <BaseLayout
-  title="Location de Bus avec Chauffeur à Bruxelles | LocationBus"
-  description="Service professionnel de location de bus avec chauffeur à Bruxelles. Transferts aéroport, voyages Europe. Devis gratuit, 7j/7, sans engagement. +32 2 446 01 91"
+  title="Location Bus avec Chauffeur Bruxelles | Minibus VIP Belgique | LocationBus"
+  description="Location de bus et minibus avec chauffeur à Bruxelles. Transport de groupe 8 à 78 places. Transferts aéroport, mariages, séminaires. Devis gratuit 24h. Ixelles, Uccle, Waterloo, Wavre."
   canonicalUrl="/"
   jsonLd={jsonLd}
   lang="fr"
@@ -63,9 +98,9 @@ const jsonLd = [
   <main id="main">
     <section class="hero" style="background-image: url('/hero-image.jpg');">
       <div class="container">
-        <h1>Location de Bus avec Chauffeur à Bruxelles</h1>
-        <p class="hero__subtitle">Service professionnel pour vos déplacements en Belgique et Europe</p>
-        <p>Depuis plus de 15 ans, LocationBus est le leader du transport en autocar avec chauffeur. {site.cta.devis}, {site.cta.reponse24h}.</p>
+        <h1>Location Bus avec Chauffeur Bruxelles – Transport de Groupe Premium</h1>
+        <p class="hero__subtitle">Minibus VIP et autocars 8 à 78 places · Wi-Fi, climatisation, toilettes · Bruxelles, Brabant Wallon & Europe</p>
+        <p>Leader du transport de groupe en Belgique, LocationBus met à votre disposition une flotte moderne et des chauffeurs professionnels. {site.cta.devis}, {site.cta.reponse24h}.</p>
         <p><a href="/contact/" class="btn">{site.cta.devisLong}</a></p>
       </div>
     </section>
@@ -74,27 +109,28 @@ const jsonLd = [
 
     <section>
       <div class="container">
-        <h2>Nos Services de Transport</h2>
+        <h2>Nos Services de Transport de Groupe à Bruxelles</h2>
+        <p>Que ce soit pour un mariage, un séminaire d'entreprise ou une sortie scolaire, nous assurons votre transport de groupe en toute sérénité.</p>
         <div class="grid-4">
           <article class="card">
-            <h3>Location Bus Transfert</h3>
-            <p>Service de transfert professionnel pour tous vos déplacements en groupe.</p>
-            <a href="/services/transfert-bus/">En savoir plus</a>
+            <h3>Transferts Aéroport Bruxelles</h3>
+            <p>Navettes vers Zaventem et Charleroi pour groupes. Ponctualité garantie, accueil personnalisé.</p>
+            <a href="/services/transfert-aeroport/" class="btn btn--small">Demander un devis</a>
           </article>
           <article class="card">
-            <h3>Location Bus Aéroport</h3>
-            <p>Transferts directs vers les aéroports de Bruxelles (Zaventem, Charleroi) et environs.</p>
-            <a href="/services/transfert-aeroport/">En savoir plus</a>
+            <h3>Location Bus Mariages</h3>
+            <p>Minibus et autocars pour le transport des invités. Confort et discrétion pour votre grand jour.</p>
+            <a href="/contact/" class="btn btn--small">Réserver</a>
           </article>
           <article class="card">
-            <h3>Voyage Longue Distance</h3>
-            <p>Voyages confortables pour vos déplacements longue distance en Europe.</p>
-            <a href="/services/voyage-europe/">En savoir plus</a>
+            <h3>Séminaires d'Entreprise</h3>
+            <p>Transport professionnel pour vos événements corporate. Bruxelles, Brabant Wallon, Europe.</p>
+            <a href="/services/transfert-bus/" class="btn btn--small">En savoir plus</a>
           </article>
           <article class="card">
-            <h3>Location Bus Europe</h3>
-            <p>Transport pour vos voyages à travers toute l'Europe (Paris, Amsterdam, Frankfurt).</p>
-            <a href="/services/">En savoir plus</a>
+            <h3>Voyages Scolaires</h3>
+            <p>Autocars sécurisés pour sorties et voyages scolaires. Véhicules conformes aux normes.</p>
+            <a href="/contact/" class="btn btn--small">Devis gratuit</a>
           </article>
         </div>
       </div>
@@ -102,40 +138,41 @@ const jsonLd = [
 
     <section class="hero-bg">
       <div class="container">
-        <h2>Notre Flotte de Véhicules</h2>
-        <p>Des véhicules modernes et confortables pour tous vos besoins.</p>
+        <h2>Flotte Location Bus & Minibus VIP Belgique</h2>
+        <p>Des véhicules de 8 à 78 places, tous équipés Wi-Fi, prises USB, climatisation et toilettes. Confort premium pour votre transport de groupe.</p>
         <div class="grid-3">
           <article class="card">
-            <h3>Autocars Luxe</h3>
-            <p>Jusqu'à 60 places. Euro 6, climatisation, sièges confort, WiFi.</p>
+            <h3>Autocars Grand Tourisme (jusqu'à 78 places)</h3>
+            <p>Euro 6, climatisation, sièges inclinables, Wi-Fi, WC. Idéal pour voyages longue distance et groupes importants.</p>
           </article>
           <article class="card">
-            <h3>Minibus VIP</h3>
-            <p>Jusqu'à 30 places. Confort premium, équipement moderne.</p>
+            <h3>Minibus VIP Belgique (8 à 30 places)</h3>
+            <p>Confort premium, cuir, climatisation, prises USB. Parfait pour mariages, séminaires et événements.</p>
           </article>
           <article class="card">
-            <h3>Minibus Standard</h3>
-            <p>Jusqu'à 20 places. Économique, fiable, idéal petits groupes.</p>
+            <h3>Minibus Standard (8 à 20 places)</h3>
+            <p>Économique et fiable. Transport de groupe local et transferts aéroport.</p>
           </article>
         </div>
+        <p class="text-center"><a href="/contact/" class="btn">Obtenir un devis pour ma location</a></p>
       </div>
     </section>
 
     <section>
       <div class="container">
-        <h2>Pourquoi Nous Choisir</h2>
+        <h2>Pourquoi Choisir LocationBus pour Votre Transport de Groupe ?</h2>
         <div class="grid-3">
           <div>
-            <h3>Prix Compétitifs</h3>
-            <p>Prix fixe incluant taxes, péages et pourboires.</p>
+            <h3>Chauffeurs Professionnels</h3>
+            <p>Equipes formées, ponctuelles et courtoises. Une conduite sûre et respectueuse de votre planning.</p>
           </div>
           <div>
-            <h3>Véhicules de Qualité</h3>
-            <p>Bus spacieux avec sièges confortables pour tous.</p>
+            <h3>Flotte Moderne et Entretenue</h3>
+            <p>Véhicules récents, Euro 6, contrôlés régulièrement. Confort et sécurité garantis.</p>
           </div>
           <div>
-            <h3>Service Sur-Mesure</h3>
-            <p>Tous les détails convenus à l'avance pour votre groupe.</p>
+            <h3>Prix Fixe Transparent</h3>
+            <p>Devis détaillé incluant taxes, péages et pourboires. Aucune mauvaise surprise.</p>
           </div>
         </div>
       </div>
@@ -143,8 +180,30 @@ const jsonLd = [
 
     <section class="hero-bg">
       <div class="container">
-        <h2>Location Bus par Commune à Bruxelles</h2>
-        <p><a href="/location-bus-bruxelles/">Voir toutes les communes</a> : Ixelles, Uccle, Schaerbeek, Etterbeek, Woluwe, Anderlecht, Bruxelles-Ville.</p>
+        <h2>Location Bus par Zone : Bruxelles, Brabant Wallon, Europe</h2>
+        <p>Nous assurons le transport de groupe au départ de <strong>Bruxelles</strong> (Ixelles, Uccle, Schaerbeek, Etterbeek, Woluwe, Anderlecht), du <strong>Brabant Wallon</strong> (Waterloo, Wavre) et de toute la Belgique. Voyages longue distance vers Paris, Amsterdam et l'Europe.</p>
+        <ul>
+          <li><a href="/location-bus-bruxelles/">Location bus Bruxelles</a> – toutes les communes</li>
+          <li><a href="/location-bus-bruxelles/ixelles/">Location bus Ixelles</a></li>
+          <li><a href="/location-bus-bruxelles/uccle/">Location bus Uccle</a></li>
+          <li><a href="/services/transfert-aeroport/">Transfert aéroport Zaventem & Charleroi</a></li>
+        </ul>
+        <p class="text-center"><a href="/contact/" class="btn">{site.cta.devisLong}</a></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Questions Fréquentes – Location Bus Bruxelles</h2>
+        <div class="faq-list">
+          {faqItems.map((item) => (
+            <article class="faq-item">
+              <h3>{item.q}</h3>
+              <p>{item.a}</p>
+            </article>
+          ))}
+        </div>
+        <p class="text-center"><a href="/contact/" class="btn">Demander un devis gratuit</a></p>
       </div>
     </section>
   </main>

@@ -114,6 +114,13 @@ ul { padding-left: 1.25rem; }
   cursor: pointer;
 }
 .btn:hover { background: var(--color-primary-hover); text-decoration: none; color: var(--color-hero-text); }
+.btn--small { padding: 0.5rem 1rem; font-size: 0.9rem; }
+
+.text-center { text-align: center; }
+
+.faq-list { max-width: 48rem; }
+.faq-item { margin-bottom: 2rem; }
+.faq-item h3 { font-size: 1.1rem; }
 
 .conversion-banner {
   padding: 1.5rem 0;
