@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ConversionBanner from '../../components/ConversionBanner.astro';
+import { site } from '../../data/site';
+
+const priceCategories = [
+  { cat: 'Minibus 8–16 places', desc: 'Idéal pour petits groupes, mariages, séminaires', from: '299', unit: 'demi-journée', note: 'Standard ou VIP' },
+  { cat: 'Bus 17–35 places', desc: 'Transport de groupe local, transferts aéroport', from: '450', unit: 'journée', note: 'Bruxelles et périphérie' },
+  { cat: 'Autocar 36–60+ places', desc: 'Voyages longue distance, sorties scolaires', from: '550', unit: 'journée', note: 'Grand tourisme Euro 6' },
+];
+
+const variationFactors = [
+  'Distance et durée du trajet',
+  'Type de véhicule (standard, VIP, grand tourisme)',
+  'Frais de parking et péages',
+  'Conduite de nuit ou week-end',
+  'Équipements spéciaux (Wi-Fi, WC, sièges inclinables)',
+];
+---
+
+<BaseLayout
+  title="Prix Location Bus Bruxelles | Tarifs Autocar | Devis Gratuit"
+  description="Prix location bus Bruxelles. Tarifs indicatifs minibus et autocar (8 à 78 places). Devis gratuit, sans engagement. Réponse sous 24h."
+  canonicalUrl="/prix/"
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero hero-bg">
+      <div class="container">
+        <h1>Transparence et Prix Compétitifs – Location Bus Bruxelles</h1>
+        <p>Des tarifs indicatifs clairs, sans surprise. Demandez votre devis personnalisé pour un prix définitif adapté à votre projet.</p>
+        <p><a href="/contact/" class="btn">Calculer mon tarif personnalisé</a></p>
+      </div>
+    </section>
+
+    <ConversionBanner />
+
+    <section>
+      <div class="container">
+        <h2>Nos Tarifs Indicatifs</h2>
+        <p>Les prix ci-dessous sont donnés à titre indicatif pour la région de Bruxelles. Chaque devis est personnalisé selon vos besoins exacts.</p>
+        <div class="price-table-wrap">
+          <table class="price-table">
+            <thead>
+              <tr>
+                <th>Catégorie</th>
+                <th>Utilisation type</th>
+                <th>À partir de</th>
+              </tr>
+            </thead>
+            <tbody>
+              {priceCategories.map((p) => (
+                <tr>
+                  <td><strong>{p.cat}</strong><br /><span class="text-muted">{p.desc}</span></td>
+                  <td>{p.unit}</td>
+                  <td><strong>{p.from} €</strong> {p.note && <span class="text-muted">({p.note})</span>}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="text-center"><a href="/contact/" class="btn">Obtenir un devis gratuit</a></p>
+      </div>
+    </section>
+
+    <section class="hero-bg">
+      <div class="container">
+        <h2>Facteurs de Variation du Prix</h2>
+        <p>Le prix final dépend de plusieurs éléments. Notre devis gratuit prend tout en compte : aucun frais caché.</p>
+        <ul>
+          {variationFactors.map((f) => (
+            <li>{f}</li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Low-Cost vs Premium : Quelle Différence ?</h2>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Offres Low-Cost</h3>
+            <p>Véhicules fonctionnels, chauffeurs corrects. Tarifs attractifs pour les budgets serrés. Peut impliquer des véhicules plus anciens, moins de flexibilité horaire et un service minimal.</p>
+          </article>
+          <article class="card">
+            <h3>Service Premium (LocationBus)</h3>
+            <p>Flotte récente Euro 6, chauffeurs professionnels, confort (Wi-Fi, clim, WC). Flexibilité, réactivité et accompagnement personnalisé. Un juste équilibre entre qualité et prix compétitif à Bruxelles.</p>
+          </article>
+        </div>
+        <p class="text-center"><a href="/contact/" class="btn">Calculer mon tarif personnalisé</a></p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .price-table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+  .price-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+  }
+  .price-table th,
+  .price-table td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--color-border); }
+  .price-table th { background: var(--color-footer-bg); font-weight: 600; }
+  .text-muted { color: var(--color-muted); font-size: 0.9rem; }
+</style>

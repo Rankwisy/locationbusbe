@@ -26,6 +26,7 @@ export const nav = [
   { label: 'Accueil', href: '/' },
   { label: 'Location Bus Bruxelles', href: '/location-bus-bruxelles/' },
   { label: 'Services', href: '/services/' },
+  { label: 'Tarifs & Devis', href: '/prix/' },
   { label: 'À propos', href: '/about/' },
   { label: 'Contact', href: '/contact/' },
 ] as const;
@@ -33,6 +34,7 @@ export const nav = [
 /** Footer: services + bruxelles communes + aéroports */
 export const footerLinks = {
   services: [
+    { label: 'Tarifs & Devis', href: '/prix/' },
     { label: 'Location bus avec chauffeur', href: '/services/' },
     { label: 'Transfert bus', href: '/services/transfert-bus/' },
     { label: 'Transfert aéroport', href: '/services/transfert-aeroport/' },
