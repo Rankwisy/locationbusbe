@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -161,7 +163,7 @@ const jsonLd = [faqSchema, contactSchema];
         const formData = new FormData(form);
         const body = new URLSearchParams();
         formData.forEach((value, key) => body.append(key, value.toString()));
-        const res = await fetch('/', {
+        const res = await fetch('/contact/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: body.toString(),
