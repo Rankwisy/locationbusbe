@@ -67,8 +67,19 @@ const jsonLd = [faqSchema, contactSchema];
           </div>
           <div>
             <h2>Demander un Devis</h2>
-            <form action="mailto:info@locationbus.be" method="post" enctype="text/plain" aria-labelledby="form-title">
+            <form
+              id="contact-form"
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              aria-labelledby="form-title"
+            >
+              <input type="hidden" name="form-name" value="contact" />
               <p id="form-title" class="visually-hidden">Formulaire de demande de devis</p>
+              <p class="visually-hidden">
+                <label>Ne pas remplir : <input name="bot-field" /></label>
+              </p>
               <p>
                 <label for="contact-name">Votre nom</label><br />
                 <input type="text" id="contact-name" name="name" required class="form-input" />
@@ -83,6 +94,12 @@ const jsonLd = [faqSchema, contactSchema];
               </p>
               <button type="submit" class="btn">Envoyer</button>
             </form>
+
+            <div id="form-success" hidden role="alert" class="form-success">
+              <h3>Merci pour votre message !</h3>
+              <p>Nous avons bien reçu votre demande de devis et vous répondrons dans les <strong>24 heures</strong>.</p>
+              <p>En cas d'urgence, appelez-nous directement au <a href={site.phoneTel}>{site.phone}</a>.</p>
+            </div>
           </div>
         </div>
 
@@ -100,3 +117,71 @@ const jsonLd = [faqSchema, contactSchema];
   </main>
   <Footer />
 </BaseLayout>
+
+<style>
+  .form-success {
+    background: #f0fdf4;
+    border: 2px solid #22c55e;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .form-success h3 {
+    color: #15803d;
+    margin-top: 0;
+  }
+  .form-toast-error {
+    color: #dc2626;
+    background: #fef2f2;
+    border: 1px solid #fca5a5;
+    border-radius: 0.25rem;
+    padding: 0.75rem 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const success = document.getElementById('form-success') as HTMLElement | null;
+
+  if (form && success) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      const prevText = submitBtn.textContent ?? 'Envoyer';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Envoi en cours…';
+
+      // Remove any previous error toast
+      form.querySelector('.form-toast-error')?.remove();
+
+      try {
+        const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
+        const res = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString(),
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        form.hidden = true;
+        success.hidden = false;
+        success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } catch {
+        submitBtn.disabled = false;
+        submitBtn.textContent = prevText;
+
+        const toast = document.createElement('p');
+        toast.className = 'form-toast-error';
+        toast.setAttribute('role', 'alert');
+        toast.textContent =
+          "Une erreur est survenue lors de l'envoi. Veuillez réessayer ou nous appeler au +32 2 446 01 91.";
+        form.appendChild(toast);
+        setTimeout(() => toast.remove(), 10000);
+      }
+    });
+  }
+</script>
