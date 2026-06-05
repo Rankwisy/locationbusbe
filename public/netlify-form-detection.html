@@ -3,9 +3,8 @@
 <head><meta charset="utf-8"><title>Form detection</title><meta name="robots" content="noindex,nofollow"></head>
 <body>
   <!-- Static Netlify form detection required for SSR (Astro output:server) -->
-  <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+  <form name="contact" netlify hidden>
     <input type="hidden" name="form-name" value="contact" />
-    <input name="bot-field" />
     <input name="name" type="text" />
     <input name="email" type="email" />
     <textarea name="message"></textarea>

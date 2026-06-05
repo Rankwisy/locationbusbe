@@ -77,8 +77,8 @@ const jsonLd = [faqSchema, contactSchema];
             >
               <input type="hidden" name="form-name" value="contact" />
               <p id="form-title" class="visually-hidden">Formulaire de demande de devis</p>
-              <p class="visually-hidden">
-                <label>Ne pas remplir : <input name="bot-field" /></label>
+              <p hidden aria-hidden="true">
+                <label>Ne pas remplir : <input name="bot-field" autocomplete="off" tabindex="-1" /></label>
               </p>
               <p>
                 <label for="contact-name">Votre nom</label><br />
@@ -158,7 +158,9 @@ const jsonLd = [faqSchema, contactSchema];
       form.querySelector('.form-toast-error')?.remove();
 
       try {
-        const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
+        const formData = new FormData(form);
+        const body = new URLSearchParams();
+        formData.forEach((value, key) => body.append(key, value.toString()));
         const res = await fetch('/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
