@@ -1,0 +1,191 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import ConversionBanner from '../../../components/ConversionBanner.astro';
+import { site } from '../../../data/site';
+import { posts } from '../../../data/blog';
+
+const post = posts.find((p) => p.slug === 'grand-prix-belgique-2026-transport-spa-francorchamps')!;
+
+const faqItems = [
+  {
+    q: 'Où se déroule le Grand Prix de Belgique 2026 ?',
+    a: "Le Grand Prix de Belgique de Formule 1 se déroule sur le circuit de Spa-Francorchamps, dans les Ardennes, entre les provinces de Liège et de Luxembourg. C'est l'un des circuits les plus prisés du calendrier F1.",
+  },
+  {
+    q: 'Pourquoi le parking est-il si compliqué à Spa-Francorchamps ?',
+    a: "Le circuit est situé en zone rurale et vallonnée, avec un réseau routier limité. Les parkings officiels sont éloignés des tribunes et se remplissent dès les premières heures, ce qui provoque de longues files à l'entrée comme à la sortie du circuit.",
+  },
+  {
+    q: 'Combien coûte la location d\'un bus pour le Grand Prix ?',
+    a: "Le tarif dépend de la taille du groupe, du point de départ (Bruxelles, Liège, Namur…) et du nombre de jours (essais libres, qualifications, course). Demandez un devis gratuit personnalisé, sans engagement.",
+  },
+  {
+    q: 'Le bus permet-il d\'éviter les embouteillages après la course ?',
+    a: "Les autocars bénéficient souvent de zones de dépose et de reprise dédiées, distinctes des flux de voitures individuelles, ce qui réduit sensiblement le temps d'attente à la sortie comparé à un véhicule particulier.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.description,
+  image: `${site.url}${post.image}`,
+  datePublished: post.date,
+  dateModified: post.date,
+  author: { '@type': 'Organization', name: site.name },
+  publisher: { '@type': 'Organization', name: site.name, logo: { '@type': 'ImageObject', url: `${site.url}/logo.png` } },
+  mainEntityOfPage: `${site.url}/blog/${post.slug}/`,
+};
+
+const jsonLd = [articleSchema, faqSchema];
+---
+
+<BaseLayout
+  title={`${post.title} | Blog LocationBus`}
+  description={post.description}
+  canonicalUrl={`/blog/${post.slug}/`}
+  ogImage={post.image}
+  ogType="article"
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero" style={`background-image: url(${post.image})`}>
+      <div class="container">
+        <p class="breadcrumb"><a href="/blog/">Blog</a> / Grand Prix de Belgique 2026</p>
+        <h1>{post.title}</h1>
+        <p>
+          <time datetime={post.date}>
+            {new Date(post.date).toLocaleDateString('fr-BE', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </time>
+        </p>
+      </div>
+    </section>
+
+    <ConversionBanner />
+
+    <section>
+      <div class="container article">
+        <img src={post.image} alt={post.imageAlt} width="1600" height="900" class="article__hero-img" />
+
+        <p>
+          Le <strong>Grand Prix de Belgique de Formule 1</strong> à Spa-Francorchamps est l'un des rendez-vous les
+          plus attendus du sport automobile mondial, et l'édition <strong>2026</strong> ne devrait pas faire
+          exception. Chaque année, des dizaines de milliers de passionnés convergent vers ce circuit mythique niché
+          dans les collines des Ardennes. Mais entre les routes de montagne sinueuses, le nombre limité de places de
+          parking et les embouteillages monstres à la sortie de la course, se rendre à Spa-Francorchamps en voiture
+          individuelle relève souvent du parcours du combattant. Voici pourquoi de plus en plus de groupes, familles
+          et comités d'entreprise optent pour un <strong>autocar avec chauffeur</strong>.
+        </p>
+
+        <h2>Spa-Francorchamps : un circuit magnifique, mais difficile d'accès</h2>
+        <p>
+          Contrairement à un circuit urbain, Spa-Francorchamps est implanté en pleine campagne ardennaise, entre
+          les communes de Stavelot et Francorchamps. Le réseau routier local, fait de routes secondaires et
+          forestières, n'est simplement pas dimensionné pour absorber l'afflux de dizaines de milliers de véhicules
+          sur un seul week-end. Résultat : les organisateurs recommandent chaque année d'anticiper plusieurs heures
+          de trajet supplémentaires, rien que pour approcher le site en voiture.
+        </p>
+
+        <h2>Les galères classiques du visiteur en voiture</h2>
+        <ul>
+          <li><strong>Parkings saturés</strong> dès la mi-journée, obligeant à se garer très loin des tribunes.</li>
+          <li><strong>Files interminables</strong> à la sortie après le drapeau à damier, parfois plus d'une heure immobile.</li>
+          <li><strong>Routes de montagne étroites</strong>, peu adaptées à un trafic dense et parfois sous la pluie ardennaise.</li>
+          <li><strong>Fatigue du conducteur</strong> après une journée entière debout dans les tribunes, sous le soleil ou la pluie.</li>
+        </ul>
+
+        <h2>Pourquoi choisir un bus avec chauffeur pour le Grand Prix</h2>
+        <p>
+          Réserver un <strong>autocar</strong> pour votre groupe résout la quasi-totalité de ces problèmes. Votre
+          chauffeur professionnel connaît les accès dédiés aux autocars, souvent situés plus près du circuit que
+          les parkings voitures, et gère la sortie du site pendant que vous profitez encore de l'ambiance de la
+          course. Le bus permet aussi de transformer le trajet en moment convivial : petit-déjeuner en route à
+          l'aller, débriefing de la course entre passionnés au retour, sans personne à désigner comme conducteur.
+          C'est également l'option la plus économique dès que le groupe dépasse quatre ou cinq personnes, en
+          divisant le coût du trajet entre tous les participants.
+        </p>
+
+        <h2>Comités d'entreprise et groupes VIP : une organisation clé en main</h2>
+        <p>
+          Le Grand Prix de Belgique est un événement très prisé pour l'<strong>hospitalité d'entreprise</strong> :
+          nombreuses sociétés y invitent clients et collaborateurs pour une journée VIP. Dans ce contexte, un
+          <a href="/services/">bus dédié</a> avec chauffeur professionnel apporte une image soignée dès la prise en
+          charge, un timing maîtrisé pour respecter les horaires d'accès aux loges et paddocks, et la possibilité
+          d'équiper le véhicule en Wi-Fi pour que les invités restent connectés pendant le trajet. LocationBus
+          organise ce type de transfert pour des groupes de 8 à plus de 60 personnes, au départ de Bruxelles, Liège,
+          Namur ou toute autre ville de Belgique.
+        </p>
+
+        <h2>Fans internationaux : de l'aéroport aux Ardennes en une seule réservation</h2>
+        <p>
+          Le Grand Prix de Belgique attire chaque année un public venu de toute l'Europe, débarquant souvent à
+          <strong>Bruxelles-Zaventem</strong>, <strong>Bruxelles-Charleroi</strong> ou à l'aéroport de Liège. Plutôt
+          que d'improviser un enchaînement train, location de voiture puis route de montagne inconnue, il est
+          possible de combiner directement un <a href="/services/transfert-aeroport/">transfert aéroport</a> et le
+          trajet vers Spa-Francorchamps avec le même prestataire. C'est la solution privilégiée par les groupes
+          internationaux qui logent à Liège, Namur ou même Bruxelles et souhaitent faire l'aller-retour vers le
+          circuit sans se soucier de la conduite sur des routes ardennaises qu'ils ne connaissent pas.
+        </p>
+
+        <h2>Anticiper la météo et les longues journées ardennaises</h2>
+        <p>
+          Le climat des Ardennes est réputé changeant, même en plein été : averses soudaines, températures
+          fraîches le matin et journées qui s'étirent souvent de l'aube jusqu'à la nuit tombée avec l'ambiance des
+          fan zones. Un autocar offre un abri confortable entre les sessions, un espace pour se réchauffer ou se
+          reposer, et surtout la certitude de ne pas devoir marcher plusieurs kilomètres sous la pluie pour
+          retrouver son véhicule après la course. C'est un argument de poids pour les familles avec enfants ou les
+          groupes de collègues qui veulent profiter de la journée sans contrainte logistique.
+        </p>
+
+        <h2>Comment réserver votre transport pour Spa-Francorchamps</h2>
+        <p>
+          La réservation se fait en trois étapes : indiquez-nous votre point de départ, le nombre de passagers et
+          les jours concernés (essais libres du vendredi, qualifications du samedi, course du dimanche) ; recevez un
+          <a href="/prix/">devis gratuit et sans engagement</a> sous 24h ; confirmez et votre chauffeur vous attend
+          le jour J, avec un point de rendez-vous clair et un horaire de retour garanti. Comme les meilleurs
+          créneaux partent vite les années de forte affluence, mieux vaut réserver plusieurs semaines à l'avance
+          pour garantir la disponibilité du véhicule adapté à votre groupe.
+        </p>
+
+        <h2>Questions fréquentes</h2>
+        <div class="faq-list">
+          {faqItems.map((item) => (
+            <div class="faq-item">
+              <h3>{item.q}</h3>
+              <p>{item.a}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-center">
+          <a href="/contact/" class="btn">Demander un devis pour le Grand Prix 2026</a>
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .breadcrumb { font-size: 0.875rem; opacity: 0.85; margin-bottom: 0.5rem; }
+  .breadcrumb a { color: inherit; text-decoration: underline; }
+  .article { max-width: 48rem; }
+  .article__hero-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); margin-bottom: 1.5rem; }
+</style>

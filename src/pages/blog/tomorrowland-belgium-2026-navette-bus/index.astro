@@ -1,0 +1,188 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import ConversionBanner from '../../../components/ConversionBanner.astro';
+import { site } from '../../../data/site';
+import { posts } from '../../../data/blog';
+
+const post = posts.find((p) => p.slug === 'tomorrowland-belgium-2026-navette-bus')!;
+
+const faqItems = [
+  {
+    q: 'Quand a lieu Tomorrowland Belgium 2026 ?',
+    a: "Tomorrowland Belgium 2026 se déroule sur deux week-ends à Boom, dans la province d'Anvers. Comme chaque année, l'affluence est maximale le vendredi et le dimanche, aux heures d'ouverture et de fermeture du site.",
+  },
+  {
+    q: 'Combien coûte une navette bus pour Tomorrowland ?',
+    a: "Le tarif dépend du nombre de passagers, du point de départ et de la durée de location. Un minibus pour un petit groupe démarre autour de 299 €, un autocar pour un grand groupe est facturé à la journée. Demandez un devis gratuit personnalisé.",
+  },
+  {
+    q: 'Peut-on réserver un aller simple ou seulement l\'aller-retour ?',
+    a: "LocationBus propose les deux formules : aller-retour dans la même journée, ou dépose et reprise à des horaires différents si votre groupe reste sur place plusieurs jours (DreamVille compris).",
+  },
+  {
+    q: 'Le bus dépose-t-il directement à l\'entrée du site ?',
+    a: "Oui, nos chauffeurs connaissent les accès et zones de dépose dédiées aux autocars à Boom, ce qui vous évite la longue marche depuis les parkings excentrés.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.description,
+  image: `${site.url}${post.image}`,
+  datePublished: post.date,
+  dateModified: post.date,
+  author: { '@type': 'Organization', name: site.name },
+  publisher: { '@type': 'Organization', name: site.name, logo: { '@type': 'ImageObject', url: `${site.url}/logo.png` } },
+  mainEntityOfPage: `${site.url}/blog/${post.slug}/`,
+};
+
+const jsonLd = [articleSchema, faqSchema];
+---
+
+<BaseLayout
+  title={`${post.title} | Blog LocationBus`}
+  description={post.description}
+  canonicalUrl={`/blog/${post.slug}/`}
+  ogImage={post.image}
+  ogType="article"
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero" style={`background-image: url(${post.image})`}>
+      <div class="container">
+        <p class="breadcrumb"><a href="/blog/">Blog</a> / Tomorrowland Belgium 2026</p>
+        <h1>{post.title}</h1>
+        <p>
+          <time datetime={post.date}>
+            {new Date(post.date).toLocaleDateString('fr-BE', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </time>
+        </p>
+      </div>
+    </section>
+
+    <ConversionBanner />
+
+    <section>
+      <div class="container article">
+        <img src={post.image} alt={post.imageAlt} width="1600" height="900" class="article__hero-img" />
+
+        <p>
+          Chaque été, <strong>Tomorrowland Belgium</strong> transforme la petite commune de Boom, en province
+          d'Anvers, en épicentre mondial de la musique électronique. Pour l'édition <strong>2026</strong>, plusieurs
+          centaines de milliers de festivaliers venus de toute l'Europe convergeront à nouveau vers le site du
+          DreamVille sur deux week-ends. Si la scène et le décor font rêver, l'accès au site reste chaque année le
+          point noir logistique du festival : routes saturées, parkings payants excentrés, et files interminables
+          pour les taxis et VTC en sortie de soirée. Voici pourquoi réserver un <strong>bus avec chauffeur</strong>
+          reste la solution la plus simple, la plus sûre et souvent la plus économique pour votre groupe.
+        </p>
+
+        <h2>Tomorrowland 2026 : une affluence record à anticiper</h2>
+        <p>
+          Le site de Boom accueille plus de 400 000 visiteurs sur l'ensemble du festival, avec des pics de trafic
+          concentrés le vendredi matin et le dimanche soir. Les autorités locales renforcent chaque année la
+          circulation et les zones de stationnement réservées, mais la demande dépasse largement l'offre de
+          parkings proches du site. Résultat : les festivaliers qui viennent en voiture individuelle perdent souvent
+          plus d'une heure entre la recherche d'une place et la marche jusqu'à l'entrée.
+        </p>
+
+        <h2>Pourquoi éviter la voiture individuelle pour se rendre à Boom</h2>
+        <p>
+          Au-delà des embouteillages, voyager en voiture pose plusieurs contraintes concrètes pour un festival comme
+          Tomorrowland : impossibilité de boire un verre en toute sérénité, risque d'amende ou de mise en fourrière
+          en cas de stationnement sauvage, et fatigue accumulée après une longue soirée de danse. Un
+          <strong>transport de groupe organisé</strong> supprime ces soucis : votre chauffeur professionnel gère la
+          route, le stationnement et les horaires de retour, pendant que vous profitez pleinement du festival.
+        </p>
+
+        <h2>Les avantages d'un bus avec chauffeur pour votre groupe</h2>
+        <ul>
+          <li><strong>Un seul point de rendez-vous</strong> pour tout le groupe, sans risque de se perdre sur le parking.</li>
+          <li><strong>Dépose et reprise près des accès autocars</strong> du site, plus proches que la majorité des parkings voitures.</li>
+          <li><strong>Sécurité</strong> : plus de conducteur désigné à sacrifier, votre chauffeur est un professionnel assuré.</li>
+          <li><strong>Confort</strong> : climatisation, sièges spacieux et espace pour se reposer après une longue journée de festival.</li>
+          <li><strong>Budget maîtrisé</strong> : le coût du bus divisé entre tous les participants revient souvent moins cher qu'un covoiturage en VTC en pleine nuit.</li>
+        </ul>
+
+        <h2>Minibus ou autocar : quelle taille choisir ?</h2>
+        <p>
+          Pour un groupe d'amis de 8 à 16 personnes, un <a href="/services/">minibus</a> suffit largement et offre
+          une grande flexibilité d'horaires. Pour une entreprise, une association ou un groupe plus large de 20 à 60
+          personnes, un <strong>autocar grand tourisme</strong> permet de rassembler tout le monde dans un seul
+          véhicule, avec Wi-Fi et espace bagages pour le matériel de festival. Dans les deux cas, LocationBus adapte
+          le véhicule à votre budget et au nombre exact de participants.
+        </p>
+
+        <h2>Festivaliers internationaux : combinez transfert aéroport et navette festival</h2>
+        <p>
+          Une large part du public de Tomorrowland vient de l'étranger et atterrit à l'aéroport de
+          <strong>Bruxelles-Zaventem</strong> ou de <strong>Bruxelles-Charleroi</strong>. Plutôt que d'enchaîner
+          train, taxi puis navette du dernier kilomètre, il est possible de combiner un
+          <a href="/services/transfert-aeroport/">transfert aéroport</a> et le trajet vers Boom en une seule
+          réservation. Cette solution est particulièrement appréciée des groupes d'amis internationaux ou des
+          comités d'entreprise qui organisent le déplacement de plusieurs collaborateurs pour l'événement, avec un
+          seul interlocuteur du début à la fin du séjour.
+        </p>
+
+        <h2>Réservez tôt : les meilleures disponibilités partent vite</h2>
+        <p>
+          Comme pour les billets du festival, les créneaux de bus les plus demandés (vendredi matin et dimanche
+          soir) se réservent plusieurs mois à l'avance. Anticiper votre demande de devis permet de garantir la
+          disponibilité du véhicule adapté à la taille de votre groupe, d'obtenir un tarif plus avantageux qu'une
+          réservation de dernière minute, et de caler précisément les horaires avec l'organisation de votre séjour
+          (logement, DreamVille, ou visite de Bruxelles avant le festival). Notre équipe reste disponible <strong>7j/7</strong>
+          pour ajuster les horaires si le programme du festival évolue.
+        </p>
+
+        <h2>Comment réserver votre navette Tomorrowland avec LocationBus</h2>
+        <p>
+          Réserver votre transport pour Tomorrowland Belgium 2026 se fait en trois étapes simples : vous nous
+          indiquez votre point de départ, le nombre de passagers et les horaires souhaités (aller le vendredi,
+          retour le dimanche, ou trajets quotidiens si vous logez à proximité) ; nous vous envoyons un
+          <a href="/prix/">devis gratuit et sans engagement</a> sous 24h ; vous confirmez votre réservation et votre
+          chauffeur vous attend le jour J. Nos autocars desservent Bruxelles et l'ensemble de la Belgique, avec des
+          départs groupés possibles depuis plusieurs villes.
+        </p>
+
+        <h2>Questions fréquentes</h2>
+        <div class="faq-list">
+          {faqItems.map((item) => (
+            <div class="faq-item">
+              <h3>{item.q}</h3>
+              <p>{item.a}</p>
+            </div>
+          ))}
+        </div>
+
+        <p class="text-center">
+          <a href="/contact/" class="btn">Demander un devis pour Tomorrowland 2026</a>
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .breadcrumb { font-size: 0.875rem; opacity: 0.85; margin-bottom: 0.5rem; }
+  .breadcrumb a { color: inherit; text-decoration: underline; }
+  .article { max-width: 48rem; }
+  .article__hero-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); margin-bottom: 1.5rem; }
+</style>

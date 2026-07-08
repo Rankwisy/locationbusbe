@@ -21,14 +21,21 @@ export const site = {
   },
 } as const;
 
-/** Nav: only /path links, no hash */
+/** Nav: only /path links, no hash. Items may carry a `children` submenu (used for the Contact dropdown). */
 export const nav = [
   { label: 'Accueil', href: '/' },
   { label: 'Location Bus Bruxelles', href: '/location-bus-bruxelles/' },
   { label: 'Services', href: '/services/' },
   { label: 'Tarifs & Devis', href: '/prix/' },
-  { label: 'À propos', href: '/about/' },
-  { label: 'Contact', href: '/contact/' },
+  { label: 'Blog', href: '/blog/' },
+  {
+    label: 'Contact',
+    href: '/contact/',
+    children: [
+      { label: 'Contact', href: '/contact/' },
+      { label: 'À propos', href: '/about/' },
+    ],
+  },
 ] as const;
 
 /** Footer: services + bruxelles communes + aéroports */

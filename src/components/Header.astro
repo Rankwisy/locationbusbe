@@ -2,22 +2,38 @@
 import { nav } from '../data/site';
 
 const currentPath = Astro.url.pathname;
+
+function isActive(href: string) {
+  return currentPath === href || (href !== '/' && currentPath.startsWith(href));
+}
 ---
 
 <header role="banner">
   <div class="container">
     <nav aria-label="Navigation principale">
-      <a href="/" aria-current={currentPath === '/' ? 'page' : undefined} class="nav-logo">
+      <a href="/" aria-current={isActive('/') ? 'page' : undefined} class="nav-logo">
         <img src="/logo.png" alt="LocationBus - Location de bus avec chauffeur à Bruxelles" width="140" height="48" />
       </a>
-      {nav.map((item) => (
-        <a
-          href={item.href}
-          aria-current={currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href)) ? 'page' : undefined}
-        >
-          {item.label}
-        </a>
-      ))}
+      {nav.map((item) =>
+        'children' in item && item.children ? (
+          <div class="nav-dropdown">
+            <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined} aria-haspopup="true">
+              {item.label}
+            </a>
+            <div class="nav-dropdown__menu">
+              {item.children.map((child) => (
+                <a href={child.href} aria-current={isActive(child.href) ? 'page' : undefined}>
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        )
+      )}
       <a href="tel:+3224460191">+32 2 446 01 91</a>
     </nav>
   </div>

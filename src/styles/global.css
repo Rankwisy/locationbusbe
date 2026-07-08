@@ -53,6 +53,24 @@ nav a { color: var(--color-text); }
 nav a[aria-current="page"] { font-weight: 600; color: var(--color-primary); }
 .nav-logo img { display: block; }
 
+.nav-dropdown { position: relative; }
+.nav-dropdown__menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 160px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.5rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+.nav-dropdown__menu a { display: block; padding: 0.4rem 1rem; }
+.nav-dropdown:hover .nav-dropdown__menu,
+.nav-dropdown:focus-within .nav-dropdown__menu { display: block; }
+
 footer {
   background: var(--color-footer-bg);
   padding: 2rem 0;
