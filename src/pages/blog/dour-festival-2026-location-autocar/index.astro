@@ -1,0 +1,240 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import ConversionBanner from '../../../components/ConversionBanner.astro';
+import { site } from '../../../data/site';
+import { posts } from '../../../data/blog';
+
+const post = posts.find((p) => p.slug === 'dour-festival-2026-location-autocar')!;
+
+const metaTitle = 'Dour Festival 2026 : Location Autocar avec Chauffeur';
+const metaDescription =
+  "Dour Festival 2026 (15-19 juillet) : réservez votre autocar avec chauffeur pour un transport de groupe sûr et confortable en Belgique. Devis gratuit sous 24h.";
+const ogTitle = 'Dour Festival 2026 : Réservez votre Autocar avec Chauffeur';
+const ogDescription =
+  "Du 15 au 19 juillet 2026, vivez Dour Festival sereinement. Location autocar, bus et minibus avec chauffeur pour groupes, en Belgique. Devis gratuit et sans engagement.";
+
+const faqItems = [
+  {
+    q: 'Quelles sont les dates de Dour Festival 2026 ?',
+    a: 'Dour Festival 2026 se déroule du 15 au 19 juillet, sur le site historique de Dour, dans le Hainaut. Le festival accueille chaque année des dizaines de milliers de festivaliers venus de toute la Belgique et d\'Europe.',
+  },
+  {
+    q: 'Pourquoi privilégier une location autocar plutôt que la voiture pour Dour ?',
+    a: "Le site de Dour dispose d'un nombre de places de parking limité et les axes routiers environnants sont vite saturés aux heures d'affluence. Une location autocar avec chauffeur vous dépose plus près des accès festival et vous évite la recherche de stationnement et la fatigue du retour.",
+  },
+  {
+    q: 'Quel véhicule choisir : minibus ou autocar ?',
+    a: "Pour un groupe de 8 à 16 personnes, la location minibus offre une grande flexibilité d'horaires. Pour un groupe plus large (association, entreprise, groupe d'amis de 20 à 60 personnes), un autocar grand tourisme permet de voyager tous ensemble dans un seul véhicule, avec espace bagages pour le matériel de camping.",
+  },
+  {
+    q: 'Combien coûte une location autocar avec chauffeur pour Dour Festival ?',
+    a: "Le tarif dépend du nombre de passagers, du point de départ et du nombre de jours (aller-retour en une journée ou plusieurs trajets sur la durée du festival). Un devis gratuit et sans engagement vous permet d'obtenir un prix exact sous 24h.",
+  },
+  {
+    q: 'Peut-on organiser des trajets sur plusieurs jours du festival ?',
+    a: "Oui. LocationBus adapte les horaires de dépose et de reprise à votre programme : un aller-retour unique, ou des trajets quotidiens si votre groupe ne campe pas sur place pendant toute la durée du festival.",
+  },
+  {
+    q: 'Le transport événementiel est-il disponible au départ de toute la Belgique ?',
+    a: "Oui, nos autocars et minibus desservent Bruxelles et l'ensemble du territoire belge. Nous pouvons organiser des points de ramassage groupés depuis plusieurs villes pour rassembler votre groupe avant le départ vers Dour.",
+  },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: metaDescription,
+  image: `${site.url}${post.image}`,
+  datePublished: post.date,
+  dateModified: post.date,
+  author: { '@type': 'Organization', name: site.name },
+  publisher: {
+    '@type': 'Organization',
+    name: site.name,
+    logo: { '@type': 'ImageObject', url: `${site.url}/logo.png` },
+  },
+  mainEntityOfPage: `${site.url}/blog/${post.slug}/`,
+};
+
+const eventSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: 'Dour Festival 2026',
+  startDate: '2026-07-15',
+  endDate: '2026-07-19',
+  location: {
+    '@type': 'Place',
+    name: 'Dour',
+    address: { '@type': 'PostalAddress', addressLocality: 'Dour', addressRegion: 'Hainaut', addressCountry: 'BE' },
+  },
+  description: 'Festival de musique en Belgique, du 15 au 19 juillet 2026.',
+};
+
+const jsonLd = [articleSchema, faqSchema, eventSchema];
+---
+
+<BaseLayout
+  title={metaTitle}
+  description={metaDescription}
+  canonicalUrl={`/blog/${post.slug}/`}
+  ogImage={post.image}
+  ogType="article"
+  jsonLd={jsonLd}
+  lang="fr"
+>
+  <Header />
+  <main id="main">
+    <section class="hero" style={`background-image: url(${post.image})`}>
+      <div class="container">
+        <p class="breadcrumb"><a href="/blog/">Blog</a> / Dour Festival 2026</p>
+        <h1>Dour Festival 2026 : Organisez votre Location Autocar avec Chauffeur</h1>
+        <p>
+          <time datetime={post.date}>
+            {new Date(post.date).toLocaleDateString('fr-BE', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </time>
+        </p>
+      </div>
+    </section>
+
+    <ConversionBanner />
+
+    <section>
+      <div class="container article">
+        <img src={post.image} alt={post.imageAlt} width="1600" height="900" class="article__hero-img" />
+
+        <p>
+          Du <strong>15 au 19 juillet 2026</strong>, le village de Dour, dans le Hainaut, accueille à nouveau l'un
+          des festivals les plus attendus de Belgique. Musiques électroniques, scènes alternatives et ambiance de
+          camping géant : <strong>Dour Festival</strong> attire chaque année des dizaines de milliers de festivaliers
+          venus de toute l'Europe. Réservez vos billets dès maintenant et pensez aussi à votre transport : la
+          <strong>location autocar avec chauffeur</strong> reste la solution la plus simple pour voyager en groupe,
+          sans stress de parking ni de conduite après une longue journée de festival.
+        </p>
+
+        <h2>Dour Festival 2026 : dates et informations pratiques</h2>
+        <p>
+          Le festival se déroule sur cinq jours, du mercredi 15 au dimanche 19 juillet 2026, sur le site historique
+          de Dour. Comme chaque édition, l'affluence est maximale les premiers jours, lorsque des milliers de
+          festivaliers arrivent en même temps pour installer leur camping. Les axes routiers autour du site sont
+          alors rapidement saturés, et les zones de stationnement proches de l'entrée se remplissent en quelques
+          heures.
+        </p>
+
+        <h2>Pourquoi choisir la location autocar pour se rendre à Dour</h2>
+        <p>
+          Voyager en <strong>transport de groupe</strong> organisé change complètement l'expérience du festival.
+          Plutôt que de gérer plusieurs voitures, un point de rendez-vous unique et un chauffeur professionnel
+          suppriment la majorité des tracas logistiques.
+        </p>
+
+        <h3>Un transport de groupe sûr et sans stress</h3>
+        <p>
+          Plus besoin de désigner un conducteur qui renonce à profiter du festival : votre chauffeur gère la route,
+          le stationnement et les horaires de retour. C'est particulièrement appréciable après plusieurs jours de
+          camping et de concerts, quand la fatigue rend la conduite individuelle risquée.
+        </p>
+
+        <h3>Location autocar avec chauffeur : confort et sérénité</h3>
+        <p>
+          Un <strong>autocar Belgique</strong> moderne offre climatisation, sièges confortables et large espace pour
+          les sacs de camping, tentes et bagages du groupe. Pour un festival de plusieurs jours comme Dour, ce
+          confort fait toute la différence à l'arrivée comme au retour.
+        </p>
+
+        <h3>Location minibus ou autocar : quelle formule choisir ?</h3>
+        <p>
+          Pour un petit groupe d'amis de 8 à 16 personnes, la <strong>location minibus</strong> offre une grande
+          souplesse d'horaires et un budget maîtrisé. Pour un groupe plus large — association, comité d'entreprise
+          ou bande de festivaliers de 20 à 60 personnes — un <strong>autocar</strong> grand tourisme permet de
+          rassembler tout le monde dans un seul véhicule, avec un seul point de départ et un seul point de retour.
+        </p>
+
+        <h2>Les avantages d'un transport événementiel bien organisé</h2>
+        <ul>
+          <li><strong>Un seul point de rendez-vous</strong> pour tout le groupe, sans risque de se perdre en route.</li>
+          <li><strong>Budget partagé</strong> : le coût de la <strong>location bus</strong> divisé entre tous les participants revient souvent moins cher qu'un covoiturage multiplié par plusieurs véhicules.</li>
+          <li><strong>Sécurité</strong> : chauffeur professionnel assuré, aucun risque lié à la fatigue ou à l'alcool sur la route du retour.</li>
+          <li><strong>Gain de temps</strong> : dépose proche des accès festival, sans la recherche interminable d'une place de parking.</li>
+          <li><strong>Flexibilité</strong> : trajets adaptés à votre programme, sur un ou plusieurs jours du festival.</li>
+        </ul>
+
+        <h2>Étudiants, associations, entreprises : un transport événementiel adapté à chaque groupe</h2>
+        <p>
+          Dour Festival rassemble des profils très variés : groupes d'étudiants qui organisent leur propre
+          déplacement, associations culturelles qui accompagnent leurs membres, ou comités d'entreprise qui offrent
+          l'expérience à leurs collaborateurs. Pour chacun de ces cas, la <strong>location autocar</strong> s'adapte
+          : facturation groupée simplifiant la gestion du budget commun, horaires calés sur le programme du groupe,
+          et possibilité d'équiper le véhicule en Wi-Fi pour les trajets les plus longs. LocationBus accompagne
+          aussi bien un petit groupe d'amis qu'une délégation de plusieurs dizaines de personnes.
+        </p>
+
+        <h2>Festivaliers internationaux : combinez transfert aéroport et navette festival</h2>
+        <p>
+          Une partie du public de Dour vient de l'étranger et atterrit à <strong>Bruxelles-Zaventem</strong> ou à
+          <strong>Bruxelles-Charleroi</strong>, plus proche du Hainaut. Plutôt que d'improviser un enchaînement
+          train puis taxi jusqu'au site, il est possible de combiner un <a href="/services/transfert-aeroport/">
+          transfert aéroport</a> et le trajet vers Dour avec le même prestataire, pour un seul interlocuteur du
+          début à la fin du séjour. Cette solution est particulièrement pratique pour les groupes internationaux
+          qui découvrent la région pour la première fois.
+        </p>
+
+        <h2>Comment réserver votre location autocar pour Dour 2026</h2>
+        <p>
+          La réservation se fait en trois étapes simples : indiquez-nous votre point de départ, le nombre de
+          passagers et les jours concernés du festival ; recevez un
+          <a href="/prix/">devis gratuit et sans engagement</a> sous 24h ; confirmez votre réservation et votre
+          chauffeur vous attend le jour J. LocationBus organise votre <a href="/services/transfert-bus/">transfert
+          bus</a> au départ de Bruxelles et de toute la Belgique, avec des points de ramassage groupés possibles
+          pour rassembler votre équipe avant le départ vers Dour. Découvrez l'ensemble de nos
+          <a href="/services/">services de transport de groupe</a> pour vos événements, festivals et voyages
+          en Belgique et en Europe.
+        </p>
+
+        <h2>Questions fréquentes</h2>
+        <div class="faq-list">
+          {faqItems.map((item) => (
+            <div class="faq-item">
+              <h3>{item.q}</h3>
+              <p>{item.a}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2>Conclusion : réservez votre autocar avant le grand départ</h2>
+        <p>
+          Dour Festival 2026 promet cinq jours d'ambiance unique en Belgique. Pour en profiter pleinement sans
+          vous soucier des embouteillages, du stationnement ou du retour de nuit, la <strong>location autocar
+          avec chauffeur</strong> reste la solution la plus confortable et la plus économique pour un groupe.
+          Réservez dès maintenant votre transport et concentrez-vous sur l'essentiel : la musique.
+        </p>
+
+        <p class="text-center">
+          <a href="/contact/" class="btn">Demander un devis pour Dour Festival 2026</a>
+        </p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .breadcrumb { font-size: 0.875rem; opacity: 0.85; margin-bottom: 0.5rem; }
+  .breadcrumb a { color: inherit; text-decoration: underline; }
+  .article { max-width: 48rem; }
+  .article__hero-img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); margin-bottom: 1.5rem; }
+</style>

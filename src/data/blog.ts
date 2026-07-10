@@ -25,6 +25,18 @@ export const posts = [
     excerpt:
       "Le Grand Prix de Belgique attire chaque année une foule immense sur les routes sinueuses des Ardennes. Le bus avec chauffeur reste la solution la plus simple pour arriver à Spa-Francorchamps sans stress.",
   },
+  {
+    slug: 'dour-festival-2026-location-autocar',
+    title: 'Dour Festival 2026 : Louez votre Autocar avec Chauffeur (15-19 juillet)',
+    description:
+      "Dour Festival 2026 se déroule du 15 au 19 juillet en Belgique. Découvrez comment organiser votre transport en groupe avec une location d'autocar avec chauffeur, sans stress ni casse-tête de parking.",
+    date: '2026-07-10',
+    image: '/images/blog/dour-festival-2026-transport-autocar.jpg',
+    imageAlt:
+      "Autocar de luxe moderne garé sur le site d'un festival de musique en Belgique, jeunes festivaliers montant à bord avec leurs sacs à dos, lumière dorée de fin d'après-midi",
+    excerpt:
+      "Du 15 au 19 juillet 2026, Dour Festival réunit des dizaines de milliers de festivaliers en Belgique. Voici comment organiser une location autocar avec chauffeur pour voyager en groupe, en toute sérénité.",
+  },
 ] as const;
 
 export type BlogPost = (typeof posts)[number];
